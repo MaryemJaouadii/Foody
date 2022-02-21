@@ -62,7 +62,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 'images/splash.png',
               ),
             ),
-            Center(child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25),textAlign: TextAlign.center,))
+            Center(child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25),textAlign: TextAlign.center,),
+            ),
+            Text('lets start')
           ],
         ));
 
