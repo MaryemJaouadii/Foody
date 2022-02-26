@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       theme: ThemeData(
           brightness: Brightness.light,
-         // primaryColor: kprimaryColor,
-          //fontFamily: 'Noto Naskh Arabic'
       ),
     );
   }
