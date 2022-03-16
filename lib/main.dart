@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'screens/LoginScreen.dart';
 
 
 
@@ -20,9 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       theme: ThemeData(
-          brightness: Brightness.light,
-         // primaryColor: kprimaryColor,
-          //fontFamily: 'Noto Naskh Arabic'
+        brightness: Brightness.light,
       ),
     );
   }
@@ -42,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 300), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
@@ -54,17 +53,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
 
-        body: Column(
+        body: Stack(
           children: [
 
-            Expanded(
-              child:  Image.asset(
-                'images/splash.png',
-              ),
+            Column(
+              children: [
+                Image.asset(
+                  'images/splash.png',
+                  width: MediaQuery.of(context).size.width,
+                ),
+                Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,)
+              ],
             ),
-            Center(child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25),textAlign: TextAlign.center,),
-            ),
-            Text('lets start')
           ],
         ));
 
@@ -90,13 +90,14 @@ class _HomePageState extends State<HomePage> {
       home: SplashScreen(),
       theme: ThemeData(
 
-          brightness: Brightness.light,
-          //primaryColor: kprimaryColor,
-         // fontFamily: 'Noto Naskh Arabic'
+        brightness: Brightness.light,
+        //primaryColor: kprimaryColor,
+        // fontFamily: 'Noto Naskh Arabic'
       ),
-     // initialRoute: LoginScreen.id,
+      initialRoute: LoginScreen.id,
 
       routes: {
+        LoginScreen.id : (context) => LoginScreen(),
 
 
 
@@ -106,4 +107,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
