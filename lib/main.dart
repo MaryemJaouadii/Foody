@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'screens/LoginScreen.dart';
+import 'package:foodproject/screens/LoginTab.dart';
+import 'package:foodproject/screens/RegisterTab.dart';
+import 'screens/Join.dart';
 
 
 
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       theme: ThemeData(
           brightness: Brightness.light,
+        fontFamily: 'Poppins'
       ),
     );
   }
@@ -41,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 300), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
@@ -55,16 +58,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
         body: Stack(
           children: [
-
-            Column(
-              children: [
                 Image.asset(
-                  'images/splash.png',
+                  'images/splashscreen.png',
                   width: MediaQuery.of(context).size.width,
+
                 ),
-                Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,)
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top:600.0),
+              child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,),
             ),
+
+
           ],
         ));
 
@@ -91,13 +95,14 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
 
           brightness: Brightness.light,
-          //primaryColor: kprimaryColor,
-         // fontFamily: 'Noto Naskh Arabic'
       ),
-      initialRoute: LoginScreen.id,
+      initialRoute: LoginTab.id,
 
       routes: {
-        LoginScreen.id : (context) => LoginScreen(),
+        Join.id : (context) => Join(),
+        LoginTab.id: (context)=>LoginTab(),
+        RegisterTab.id: (context)=>RegisterTab(),
+
 
 
 
