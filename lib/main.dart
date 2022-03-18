@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:foodproject/screens/HomeScreen.dart';
 import 'screens/LoginScreen.dart';
 
 
 
 void main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
-
-
   runApp(MyApp());
 }
 
@@ -27,11 +24,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -41,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 300), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
@@ -49,13 +41,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-
         body: Stack(
           children: [
-
             Column(
               children: [
                 Image.asset(
@@ -67,10 +55,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ],
         ));
-
-
-
-
   }
 }
 
@@ -89,20 +73,14 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       theme: ThemeData(
-
         brightness: Brightness.light,
         //primaryColor: kprimaryColor,
-        // fontFamily: 'Noto Naskh Arabic'
+        fontFamily: 'Poppins'
       ),
-      initialRoute: LoginScreen.id,
-
+      initialRoute: HomeScreen.id,
       routes: {
         LoginScreen.id : (context) => LoginScreen(),
-
-
-
-
-
+        HomeScreen.id : (context) => HomeScreen(),
       },
     );
   }
