@@ -36,6 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+          /*
+          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+          * Profile Picture
+          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+          */
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 10.0),
@@ -46,9 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   shape: BoxShape.circle,
                   color: Colors.grey, //remove this when you add image.
                 ),
-
               ),
             )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.query_stats),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.monitor_heart),label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.person),label: ""),
+
         ],
       ),
       body: ListView(
