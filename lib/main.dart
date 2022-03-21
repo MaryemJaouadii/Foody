@@ -75,7 +75,8 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
         brightness: Brightness.light,
         //primaryColor: kprimaryColor,
-        fontFamily: 'Poppins'
+        fontFamily: 'Poppins',
+        scaffoldBackgroundColor: Color(0xFFFBFEFE),
       ),
       initialRoute: HomeScreen.id,
       routes: {

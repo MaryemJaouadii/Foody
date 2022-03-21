@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -13,11 +15,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var myList = ['ABC', 'CDE', 'EFG','HIJ'];
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFFCFFFF),
         centerTitle: false,
         elevation: 0,
         toolbarHeight: 100,
@@ -49,21 +59,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 50,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.grey, //remove this when you add image.
+                  color: Colors.blue, //remove this when you add image.
                 ),
               ),
             )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.query_stats),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.monitor_heart),label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: ""),
-
+        iconSize: 30.0,
+        unselectedItemColor: Colors.black45,
+        selectedItemColor: const Color(0xff44cb7f),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.house,),label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.query_stats),label: "Stats"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favorites"),
+          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
+
       body: ListView(
         children: [
           Padding(
@@ -73,11 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   (e) => SearchFieldListItem(e),
                      ).toList(),
               searchInputDecoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xFFF5F7FB),
                 contentPadding: EdgeInsets.symmetric(vertical: 15.0),
                 hintText: "Have a dish in mind?",
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(style: BorderStyle.none, width: 0.0)
                 ),
               ),
             ),

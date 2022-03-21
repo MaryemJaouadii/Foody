@@ -38,6 +38,7 @@ dependencies:
   avatar_glow: ^2.0.2
   highlight_text: ^1.3.0
   searchfield: ^0.6.2
+  font_awesome_flutter: ^10.0.0
 
 
 
