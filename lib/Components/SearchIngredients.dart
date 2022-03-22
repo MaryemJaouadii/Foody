@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Models/IngredientModel.dart';
+import '../Models/CategoryModel.dart';
 
 class SearchIngredients extends StatefulWidget {
   const SearchIngredients({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class SearchIngredients extends StatefulWidget {
 }
 
 class _SearchIngredientsState extends State<SearchIngredients> {
-  final List<IngredientModel> _items = generateItems(5);
+  final List<CategoryModel> _items = generateItems(2,"Milk",['one','two']);
 
   @override
   Widget build(BuildContext context) {
