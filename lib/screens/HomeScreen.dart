@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:searchfield/searchfield.dart';
+import 'package:foodproject/Components/myAppBar.dart';
+
 import '../Components/SearchIngredients.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var myList = ['ABC', 'CDE', 'EFG', 'HIJ'];
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -25,51 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFFCFFFF),
-        centerTitle: false,
-        elevation: 0,
-        toolbarHeight: 100,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            SizedBox(
-              height: 100,
-            ),
-            Text("Hello Peter,",
-                style: TextStyle(
-                    color: Colors.black45, fontWeight: FontWeight.w600)),
-            Text(
-              "What do you want to eat today ?",
-              style: TextStyle(
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-          ],
-        ),
-        /*
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          * Profile Picture
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          */
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue, //remove this when you add image.
-              ),
-            ),
-          )
-        ],
-      ),
+      appBar: const myAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30.0,
         unselectedItemColor: Colors.black45,
@@ -91,31 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
-              child: SearchField(
-                suggestions: myList
-                    .map(
-                      (e) => SearchFieldListItem(e),
-                    )
-                    .toList(),
-                searchInputDecoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xFFF5F7FB),
-                  contentPadding: EdgeInsets.symmetric(vertical: 15.0),
-                  hintText: "Have a dish in mind?",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide:
-                          BorderSide(style: BorderStyle.none, width: 0.0)),
-                ),
-              ),
+              padding: EdgeInsets.all(10.0),
+              child: SearchIngredients(),
             ),
-            SearchIngredients(),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(10.0),
               child: Text("Categories",
                   style:

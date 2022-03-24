@@ -1,0 +1,41 @@
+{
+  "ingredientCategories" : [
+    {
+      "catId": "Dp",
+      "catImg": "images/milk.png",
+      "catName": "Eggs and dairy products"
+    },
+    {
+      "catId": "Veg",
+      "catImg": "images/vegetable.png",
+      "catName": "Vegetables"
+    },
+    {
+      "catId": "Spc",
+      "catImg": "images/spices.png",
+      "catName": "Spices, herbs and seeds"
+    },
+    {
+      "catId": "Sg",
+      "catImg": "images/sugar.png",
+      "catName": "Sugar and chocolates"
+    },
+    {
+      "catId": "Fr",
+      "catImg": "images/fruit.png",
+      "catName": "Fruits"
+    },
+    {
+      "catId": "Fl",
+      "catImg": "images/flour.png",
+      "catName": "Flours and yeasts"
+    },
+    {
+      "catId": "Oil",
+      "catImg": "images/oil.png",
+      "catName": "Oils and fats"
+    }
+
+  ]
+
+}
