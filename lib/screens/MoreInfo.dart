@@ -11,6 +11,14 @@ class MoreInfo extends StatefulWidget {
 }
 
 class _MoreInfoState extends State<MoreInfo> {
+  late List<GDPData> _chartData;
+
+  @override
+  void initState() {
+    _chartData=getChartData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -52,6 +60,21 @@ class _MoreInfoState extends State<MoreInfo> {
                               fontFamily: 'Poppins',
                               decoration: TextDecoration.none),
                         ),
+                        Column(
+                          children: [
+                            SfCircularChart(
+                              series: <CircularSeries>[
+                                DoughnutSeries<GDPData,String>(
+                                  dataSource: _chartData,
+                                  xValueMapper: (GDPData data,_)=> data.continet,
+                                  yValueMapper: (GDPData data,_)=> data.gdp,
+                                  dataLabelSettings: DataLabelSettings(isVisible: true))
+                              ],
+
+                            ),
+                          ],
+                        ),
+
                       ],
                     ),
                   ],
@@ -61,4 +84,23 @@ class _MoreInfoState extends State<MoreInfo> {
       ],
     );
   }
+
+
+  List<GDPData> getChartData() {
+    final List<GDPData> chartData= [
+      GDPData('Carbs', 37),
+      GDPData('Feat', 38),
+      GDPData('Protein', 32),
+      GDPData('Calories', 31),
+    ];
+    return chartData;
+  }
+
+}
+
+
+class GDPData {
+  GDPData(this.continet, this.gdp);
+  final String continet;
+  final int gdp;
 }
