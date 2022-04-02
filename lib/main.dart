@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:foodproject/screens/LoginTab.dart';
+import 'package:foodproject/screens/MoreInfo.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
-import 'screens/Join.dart';
 
 
 
@@ -99,9 +99,9 @@ class _HomePageState extends State<HomePage> {
       initialRoute: LoginTab.id,
 
       routes: {
-        Join.id : (context) => Join(),
         LoginTab.id: (context)=>LoginTab(),
         RegisterTab.id: (context)=>RegisterTab(),
+        MoreInfo.id: (context)=>MoreInfo(),
 
 
 
