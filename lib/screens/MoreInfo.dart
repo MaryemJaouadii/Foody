@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class MoreInfo extends StatefulWidget {
   static const String id = 'moreinfo';
@@ -13,16 +15,15 @@ class _MoreInfoState extends State<MoreInfo> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-            child: new Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [new Image.asset("images/saladmix.jpg")])),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [Image.asset("images/saladmix.jpg")]),
         DraggableScrollableSheet(
           initialChildSize: 0.60,
-     //maxChildSize: 0.7,
+          //maxChildSize: 0.7,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
@@ -32,12 +33,25 @@ class _MoreInfoState extends State<MoreInfo> {
                 child: Stack(
                   children: <Widget>[
                     ListView(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       controller: scrollController,
                       children: [
-                        Text('Salad Mix', style: TextStyle(color: Colors.black.withOpacity(0.7), fontSize: 20, fontFamily: 'Poppins', decoration: TextDecoration.none),),
-                        Text('1 Bowl (300 g)', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 15, fontFamily: 'Poppins', decoration: TextDecoration.none),),
-
+                        Text(
+                          'Salad Mix',
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.7),
+                              fontSize: 20,
+                              fontFamily: 'Poppins',
+                              decoration: TextDecoration.none),
+                        ),
+                        Text(
+                          '1 Bowl (300 g)',
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.3),
+                              fontSize: 15,
+                              fontFamily: 'Poppins',
+                              decoration: TextDecoration.none),
+                        ),
                       ],
                     ),
                   ],
@@ -47,5 +61,4 @@ class _MoreInfoState extends State<MoreInfo> {
       ],
     );
   }
-
 }
