@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
 import 'package:foodproject/screens/cameraDetection.dart';
-import 'screens/Join.dart';
+
 import 'package:camera/camera.dart';
 
 List<CameraDescription> cameras={} as List<CameraDescription>;
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
       initialRoute: LoginTab.id,
 
       routes: {
-        Join.id : (context) => Join(),
+        CameraDetection.id : (context) => CameraDetection(),
         LoginTab.id: (context)=>LoginTab(),
         RegisterTab.id: (context)=>RegisterTab(),
 
