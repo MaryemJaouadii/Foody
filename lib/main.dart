@@ -2,16 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
+import 'package:foodproject/screens/cameraDetection.dart';
 import 'screens/Join.dart';
+import 'package:camera/camera.dart';
 
-
-
-void main() async {
+List<CameraDescription> cameras={} as List<CameraDescription>;
+Future<void> main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
 
-
+  cameras= await availableCameras();
   runApp(MyApp());
 }
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: CameraDetection(),
       theme: ThemeData(
           brightness: Brightness.light,
         fontFamily: 'Poppins'

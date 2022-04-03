@@ -35,6 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   iconsax: ^0.0.8
+  camera: ^0.9.4+16
+  tflite: ^1.1.2
+
 
 
 dev_dependencies:
@@ -62,6 +65,7 @@ flutter:
   # To add images to your application, add an images section, like this:
   assets:
     - images/
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
