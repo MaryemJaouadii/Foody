@@ -48,7 +48,6 @@ bool selected = false;
                     onTap: (){
                       print(i.isChecked.toString());
 
-                      i.setIsChecked();
                       print(i.isChecked.toString());
                     setState(() {
 
