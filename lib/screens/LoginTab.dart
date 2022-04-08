@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodproject/constants.dart';
+import 'package:foodproject/main.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:foodproject/screens/HomeScreen.dart';
 
 class LoginTab extends StatefulWidget {
   static const String id = 'login';
@@ -21,7 +23,9 @@ class _LoginTabState extends State<LoginTab> {
   bool showSpinner = false;
   void _trySubmitForm() {
     final isValid = _formKey.currentState?.validate();
-    if (isValid == true) {}
+    if (isValid == true) {
+      Navigator.pushNamed(context, HomeScreen.id);
+    }
   }
 
   @override
@@ -117,7 +121,7 @@ class _LoginTabState extends State<LoginTab> {
                         color: Color(0xFFEA676A),
                         borderRadius: BorderRadius.circular(15.0)),
                     child: OutlinedButton(
-                        onPressed: _trySubmitForm,
+                        onPressed: () {Navigator.pushNamed(context, HomeScreen.id);},
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: const Text('Login',
