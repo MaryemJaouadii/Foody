@@ -9,15 +9,23 @@ class Ingredient{
   String ingrId;
   String ingrName;
   String catId;
+  //TODO calories in 100g
 
   Ingredient(this.ingrId, this.ingrName, this.catId);
 }
 
 class IngredientView{
   Ingredient ingredient;
-  bool ingrIsChecked;
+  bool isChecked;
 
-  IngredientView(this.ingredient, {this.ingrIsChecked = false});
+  IngredientView(this.ingredient, {this.isChecked = false});
+  //
+  // addIngredient()=>isChecked=true;
+  //
+  // removeIngredient()=>isChecked=false;
+  // TODO I think tji fi classe recherche
+
+
 }
 
 

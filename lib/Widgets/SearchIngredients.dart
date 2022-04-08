@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Models/IngredientCategory.dart';
+import '../Widgets/IngredientCategoryView.dart';
+import 'package:foodproject/Models/IngredientCategory.dart';
 import 'package:searchfield/searchfield.dart';
 
 class SearchIngredients extends StatefulWidget {
@@ -10,7 +11,7 @@ class SearchIngredients extends StatefulWidget {
 }
 
 class _SearchIngredientsState extends State<SearchIngredients> {
-  final List<IngredientCategoryView> _items = generateItems();
+ // final List<IngredientCategoryView> _items = generateItems();
   var myList = ['ABC', 'CDE', 'EFG', 'HIJ'];
 
 
@@ -38,7 +39,7 @@ class _SearchIngredientsState extends State<SearchIngredients> {
               filled: true,
               fillColor: Color(0xFFF5F7FB),
               contentPadding: EdgeInsets.symmetric(vertical: 15.0),
-              hintText: "Have a dish in mind?",
+              hintText: "Search by recipe, ingredient, dish...",
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -47,14 +48,16 @@ class _SearchIngredientsState extends State<SearchIngredients> {
             ),
           ),
         ),
-        ExpansionPanelList(
-          animationDuration: Duration(milliseconds: 1000),
-          children: getExpansionPanels(_items),
-          expansionCallback: (panelIndex, isExpanded) {
-            _items[panelIndex].isExpanded = !isExpanded;
-            setState(() {});
-          },
-        ),
+        for(var i in categories)
+        IngredientCategoryView(i)
+        // ExpansionPanelList(
+        //   animationDuration: Duration(milliseconds: 1000),
+        //   children: getExpansionPanels(_items),
+        //   expansionCallback: (panelIndex, isExpanded) {
+        //     _items[panelIndex].isExpanded = !isExpanded;
+        //     setState(() {});
+        //   },
+        // ),
       ],
     );
   }

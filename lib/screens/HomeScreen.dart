@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodproject/Components/myAppBar.dart';
+import 'package:foodproject/Widgets/myAppBar.dart';
 
-import '../Components/SearchIngredients.dart';
+import '../Widgets/SearchIngredients.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home';
