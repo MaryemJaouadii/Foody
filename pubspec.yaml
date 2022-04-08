@@ -40,7 +40,6 @@ dependencies:
   searchfield: ^0.6.2
   json_annotation: ^4.4.0
   http: ^0.13.4
-  multi_select_flutter: ^4.1.2
 
 
 
