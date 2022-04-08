@@ -40,6 +40,9 @@ dependencies:
   searchfield: ^0.6.2
   json_annotation: ^4.4.0
   http: ^0.13.4
+  iconsax: ^0.0.8
+  camera: ^0.9.4+16
+  tflite: ^1.1.2
 
 
 
