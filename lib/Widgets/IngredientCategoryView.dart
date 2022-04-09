@@ -36,6 +36,7 @@ class _IngredientCategoryViewState extends State<IngredientCategoryView> {
                       color: widget.category.getIngredientsView()[index].isChecked ? Colors.red : Colors.blue,
                       border: Border.all(
                         color: Colors.transparent,
+                        
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Padding(
