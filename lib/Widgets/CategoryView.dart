@@ -29,6 +29,7 @@ class _CategoryViewState extends State<CategoryView> {
       children: [
         Container(
           height: 45,
+          width: MediaQuery.of(context).size.width,
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.symmetric(horizontal: 35.0),
           child: ListView.builder(
