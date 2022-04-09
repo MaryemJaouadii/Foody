@@ -127,6 +127,7 @@ import 'package:flutter/material.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
+import 'package:provider/provider.dart';
 
 
 

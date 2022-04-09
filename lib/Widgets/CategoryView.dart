@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Models/IngredientCategory.dart';
+import '../Models/Ingredient.dart';
+import '../Models/Category.dart';
 
-class IngredientCategoryView extends StatefulWidget {
-  late IngredientCategory category;
+class CategoryView extends StatefulWidget {
+  late Category category;
 
-  IngredientCategoryView(this.category);
+  CategoryView(this.category);
 
   @override
-  _IngredientCategoryViewState createState() => _IngredientCategoryViewState();
+  _CategoryViewState createState() => _CategoryViewState();
 }
 
-class _IngredientCategoryViewState extends State<IngredientCategoryView> {
-  bool selected = false;
+class _CategoryViewState extends State<CategoryView> {
+
   @override
   Widget build(BuildContext context) {
+
+    List<IngredientView> ingredients = widget.category.getIngredients().map((e) => IngredientView(e)).toList();
+
     return ExpansionTile(
       title: Text(widget.category.catName,
           style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500)),
@@ -30,13 +34,13 @@ class _IngredientCategoryViewState extends State<IngredientCategoryView> {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-            itemCount: widget.category.getIngredientsView().length,
+            itemCount: ingredients.length,
               itemBuilder: (context, index) {
             return GestureDetector(
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 3.0),
+                margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 3.0),
                 decoration: BoxDecoration(
-                    color: widget.category.getIngredientsView()[index].isChecked ? Colors.red : Colors.blue,
+                    color: IngredientView.selectedIngredients.contains(ingredients[index].ingredient) ? Colors.red : Colors.blue,
                     border: Border.all(
                       color: Colors.transparent,
 
@@ -45,11 +49,18 @@ class _IngredientCategoryViewState extends State<IngredientCategoryView> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 8.0, vertical: 5.0),
-                   child: Text(widget.category.getIngredientsView()[index].ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
+                   child: Text(ingredients[index].ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
                 ),
               ),
               onTap: () {
+                print(ingredients[index].isChecked);
+                ingredients[index].setChecked();
                 setState(() {});
+                print(ingredients[index].isChecked);
+                print("*************");
+                for(var i in IngredientView.selectedIngredients)
+                print(i.ingrName);
+                print("***************");
               },
             );
           }),

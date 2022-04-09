@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Widgets/IngredientCategoryView.dart';
-import 'package:foodproject/Models/IngredientCategory.dart';
+import '../Widgets/CategoryView.dart';
+import 'package:foodproject/myData/CategoriesData.dart';
 import 'package:searchfield/searchfield.dart';
 
 class SearchIngredients extends StatefulWidget {
@@ -48,16 +48,8 @@ class _SearchIngredientsState extends State<SearchIngredients> {
             ),
           ),
         ),
-        for(var i in categories)
-        IngredientCategoryView(i)
-        // ExpansionPanelList(
-        //   animationDuration: Duration(milliseconds: 1000),
-        //   children: getExpansionPanels(_items),
-        //   expansionCallback: (panelIndex, isExpanded) {
-        //     _items[panelIndex].isExpanded = !isExpanded;
-        //     setState(() {});
-        //   },
-        // ),
+        for(var i in categoriesData)
+        CategoryView(i),
       ],
     );
   }

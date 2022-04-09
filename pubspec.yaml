@@ -45,6 +45,8 @@ dependencies:
   #tflite: ^1.1.2
   tflite_flutter: ^0.9.0
   syncfusion_flutter_charts: ^19.4.56
+  provider: ^6.0.2
+
 
 
 
