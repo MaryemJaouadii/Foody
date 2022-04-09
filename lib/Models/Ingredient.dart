@@ -19,6 +19,15 @@ class IngredientView{
   bool isChecked;
 
   IngredientView(this.ingredient, {this.isChecked = false});
+
+  setChecked(bool checked){
+    this.isChecked=checked;
+  }
+
+  bool getChecked() {
+    return this.isChecked;
+  }
+
   //
   // addIngredient()=>isChecked=true;
   //
