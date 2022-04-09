@@ -23,33 +23,31 @@ class _IngredientCategoryViewState extends State<IngredientCategoryView> {
         backgroundImage: AssetImage(widget.category.catImg),
       ),
       children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28.0),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.category.getIngredientsView().length,
-                itemBuilder: (context, index) {
-              return GestureDetector(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 3.0),
-                  decoration: BoxDecoration(
-                      color: widget.category.getIngredientsView()[index].isChecked ? Colors.red : Colors.blue,
-                      border: Border.all(
-                        color: Colors.transparent,
-                        
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 5.0),
-                     child: Text(widget.category.getIngredientsView()[index].ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
+        ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.category.getIngredientsView().length,
+            itemBuilder: (context, index) {
+          return GestureDetector(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 3.0),
+              decoration: BoxDecoration(
+                  color: widget.category.getIngredientsView()[index].isChecked ? Colors.red : Colors.blue,
+                  border: Border.all(
+                    color: Colors.transparent,
+
                   ),
-                ),
-                onTap: () {
-                  setState(() {});
-                },
-              );
-            })),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0, vertical: 5.0),
+                 child: Text(widget.category.getIngredientsView()[index].ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
+              ),
+            ),
+            onTap: () {
+              setState(() {});
+            },
+          );
+        }),
       ],
     );
   }
