@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'LoginTab.dart';
 import'package:firebase_core/firebase_core.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class RegisterTab extends StatefulWidget {
   static const String id = 'register';
   const RegisterTab({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class RegisterTab extends StatefulWidget {
 
 class _RegisterTabState extends State<RegisterTab> {
   final _auth=FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
   late String email;
   late String password;
@@ -55,8 +56,18 @@ class _RegisterTabState extends State<RegisterTab> {
     if (isValid == true) {
       try{
         final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        if(newUser != null)
+        if(newUser != null) {
+          _firestore
+              .collection("Users")
+              .add({
+            "email": email,
+            "username": userNAme,
+            "password": password
+          }).then((value) {
+            print(value);
+          });
           Navigator.pushNamed(context, LoginTab.id);
+        }
       }
       catch(e)
       {print(e);}
