@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodproject/myData/IngredientsData.dart';
 import '../Models/Ingredient.dart';
 import '../Models/Category.dart';
 
@@ -29,20 +30,18 @@ class _CategoryViewState extends State<CategoryView> {
         ),
         children: [
           Container(
-            height: 45,
-            width: MediaQuery.of(context).size.width,
+            //height: 45,
+           // width: MediaQuery.of(context).size.width,
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 35.0),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-              itemCount: ingredients.length,
-                itemBuilder: (context, index) {
-              return GestureDetector(
+            child: Wrap(
+                children:[
+                  for(var i in ingredients)
+                GestureDetector(
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 3.0),
                   decoration: BoxDecoration(
-                      color: IngredientView.selectedIngredients.contains(ingredients[index].ingredient) ? Colors.red : Colors.blue,
+                      color: IngredientView.selectedIngredients.contains(i.ingredient) ? Colors.red : Colors.blue,
                       border: Border.all(
                         color: Colors.transparent,
 
@@ -51,16 +50,16 @@ class _CategoryViewState extends State<CategoryView> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 5.0),
-                     child: Text(ingredients[index].ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
+                     child: Text(i.ingredient.ingrName, style: TextStyle(fontSize: 14.0)),
                   ),
                 ),
                 onTap: () {
-                  ingredients[index].setChecked();
+                  i.setChecked();
                   setState(() {});
 
                 },
-              );
-            }),
+              )]
+            ),
           ),
         ],
       ),

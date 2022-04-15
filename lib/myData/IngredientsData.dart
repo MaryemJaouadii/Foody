@@ -15,3 +15,10 @@ import '../Models/Ingredient.dart';
     Ingredient("7", "Cumen", "Spc",375),
   ];
 
+  List<String> getAllIngredientsName(){
+    List<String> myList = [];
+    for(var i in ingredientsData)
+      myList.add(i.ingrName.toLowerCase());
+    return myList;
+  }
+
