@@ -123,6 +123,7 @@
 
 
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
@@ -138,7 +139,7 @@ void main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
-
+  Firebase.initializeApp();
 
   runApp(MyApp());
 }
@@ -224,7 +225,7 @@ class _HomePageState extends State<HomePage> {
 
         brightness: Brightness.light,
       ),
-      initialRoute: LoginTab.id,
+      initialRoute: RegisterTab.id,
 
       routes: {
         LoginTab.id: (context)=>LoginTab(),

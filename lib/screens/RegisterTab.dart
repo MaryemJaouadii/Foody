@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'LoginTab.dart';
+import'package:firebase_core/firebase_core.dart';
 
 class RegisterTab extends StatefulWidget {
   static const String id = 'register';
@@ -13,12 +14,65 @@ class RegisterTab extends StatefulWidget {
 }
 
 class _RegisterTabState extends State<RegisterTab> {
-  var _formKey;
+  final _auth=FirebaseAuth.instance;
+  late User loggedInUser;
+  late String email;
+  late String password;
+  late String userNAme;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController userNameController = new TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-  void _trySubmitForm() {
-    final isValid = _formKey.currentState?.validate();
-    if (isValid == true) {}
+    getCurrentUser();
   }
+@override
+  void dispose() {
+    // TODO: implement dispose
+  emailController.dispose();
+  passwordController.dispose();
+  userNameController.dispose();
+    super.dispose();
+  }
+  void getCurrentUser()async{
+    try{
+      final user = await _auth.currentUser;
+      if (user != null){
+      loggedInUser = user;
+      print(loggedInUser.email);
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+
+ void _trySubmitForm() async {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid == true) {
+      try{
+        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+        if(newUser != null)
+          Navigator.pushNamed(context, LoginTab.id);
+      }
+      catch(e)
+      {print(e);}
+    }
+  }
+ /* void _trySubmitForm() async {
+
+      try{
+        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+        if(newUser != null)
+          Navigator.pushNamed(context, LoginTab.id);
+      }
+      catch(e)
+      {print(e);}
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +93,7 @@ class _RegisterTabState extends State<RegisterTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: TextFormField(
+                  controller: userNameController,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter a name!';
@@ -56,12 +111,16 @@ class _RegisterTabState extends State<RegisterTab> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                   ),
+                  onChanged: (value){
+                    userNAme=userNameController.text;
+                  },
                 ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
               TextFormField(
+                controller: emailController,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter an email!';
@@ -82,11 +141,15 @@ class _RegisterTabState extends State<RegisterTab> {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 ),
+                onChanged: (value){
+                  email=emailController.text;
+                },
               ),
               const SizedBox(
                 height: 20.0,
               ),
               TextFormField(
+                controller: passwordController,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter your password';
@@ -107,6 +170,9 @@ class _RegisterTabState extends State<RegisterTab> {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 ),
+                onChanged: (value){
+                  password=passwordController.text;
+                },
               ),
               const SizedBox(
                 height: 40.0,
@@ -124,9 +190,7 @@ class _RegisterTabState extends State<RegisterTab> {
                             fontSize: 25.0,
                           )))),
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginTab.id);
-                  },
+                  onPressed:(){Navigator.pushNamed(context, LoginTab.id);},
                   child: const Text(
                     "Already have an Account? Sign In",
                     textAlign: TextAlign.start,
