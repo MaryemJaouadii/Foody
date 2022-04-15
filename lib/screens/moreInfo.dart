@@ -6,11 +6,22 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../constants.dart';
 
 class MoreInfo extends StatefulWidget {
-  final String title, desc, imgUrl, url ;
-  final int  calories , totalWeight, totalTime,sugar, fat,protein;
+  final String title, desc, imgUrl, url;
+  final int calories, totalWeight, totalTime, sugar, fat, protein;
+  final List ingredientLines;
 
-  MoreInfo(this.title, this.desc, this.imgUrl, this.url, this.calories,
-      this.totalWeight, this.totalTime, this.sugar, this.fat, this.protein);
+  MoreInfo(
+      this.title,
+      this.desc,
+      this.imgUrl,
+      this.url,
+      this.calories,
+      this.totalWeight,
+      this.totalTime,
+      this.sugar,
+      this.fat,
+      this.protein,
+      this.ingredientLines);
 
   @override
   State<MoreInfo> createState() => _MoreInfoState();
@@ -64,18 +75,39 @@ class _MoreInfoState extends State<MoreInfo> {
                       padding: const EdgeInsets.all(20),
                       controller: scrollController,
                       children: [
-                        Text(
-                          widget.title,
-                          style:kFoodHealthDetailsStyle.copyWith(color: Colors.black.withOpacity(0.7),
-                              fontSize: 20),
-                        ),
-                        Text(
-                          '1 Bowl ('+ widget.totalWeight.toString() +' g)',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.3),
-                              fontSize: 15,
-                              fontFamily: 'Poppins',
-                              decoration: TextDecoration.none),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  widget.title,
+                                  style: kFoodHealthDetailsStyle.copyWith(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 20),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  '1 Bowl (' +
+                                      widget.totalWeight.toString() +
+                                      ' g)',
+                                  style: kFoodHealthDetailsStyle.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black.withOpacity(0.3),
+                                      fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'View Full Recipe',
+                                  style: kFoodHealthDetailsStyle.copyWith(
+                                      color: Color(0xFF4fc17f)),
+                                ))
+                          ],
                         ),
                         SizedBox(
                           height: 20,
@@ -85,8 +117,7 @@ class _MoreInfoState extends State<MoreInfo> {
                           children: [
                             Column(
                               children: [
-                                Text('sugar',
-                                    style: kFoodHealthDetailsStyle),
+                                Text('sugar', style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
                                   width: 80, // width of the Container widget
@@ -114,8 +145,7 @@ class _MoreInfoState extends State<MoreInfo> {
                             ),
                             Column(
                               children: [
-                                Text('fat',
-                                    style: kFoodHealthDetailsStyle),
+                                Text('fat', style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
                                   width: 80, // width of the Container widget
@@ -143,8 +173,7 @@ class _MoreInfoState extends State<MoreInfo> {
                             ),
                             Column(
                               children: [
-                                Text('protein',
-                                    style:kFoodHealthDetailsStyle),
+                                Text('protein', style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
                                   width: 80, // width of the Container widget
@@ -166,7 +195,7 @@ class _MoreInfoState extends State<MoreInfo> {
                                     ],
                                   ),
                                 ),
-                                Text(_proteinData[0].quantity.toString() + ' g' ,
+                                Text(_proteinData[0].quantity.toString() + ' g',
                                     style: kFoodHealthDetailsStyle),
                               ],
                             ),
@@ -202,6 +231,32 @@ class _MoreInfoState extends State<MoreInfo> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'What will you need:',
+                              style: kFoodHealthDetailsStyle.copyWith(
+                                  color: Colors.black.withOpacity(0.7),
+                                  fontSize: 20),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            for (var i in widget.ingredientLines)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  i,
+                                  style: kFoodHealthDetailsStyle.copyWith(
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                          ],
+                        )
                       ],
                     ),
                   ],
@@ -214,16 +269,19 @@ class _MoreInfoState extends State<MoreInfo> {
 
   List<FoodData>? getChartData(String axe) {
     final List<FoodData> sugarData = [
-      FoodData('sugar', ((widget.sugar/widget.totalWeight)*100).round()  ),
-      FoodData('none', 100-((widget.sugar/widget.totalWeight)*100).round()),
+      FoodData('sugar', ((widget.sugar / widget.totalWeight) * 100).round()),
+      FoodData(
+          'none', 100 - ((widget.sugar / widget.totalWeight) * 100).round()),
     ];
     final List<FoodData> fatData = [
-      FoodData('fat', ((widget.fat/widget.totalWeight)*100).round()),
-      FoodData('none', 100-((widget.fat/widget.totalWeight)*100).round()),
+      FoodData('fat', ((widget.fat / widget.totalWeight) * 100).round()),
+      FoodData('none', 100 - ((widget.fat / widget.totalWeight) * 100).round()),
     ];
     final List<FoodData> proteinData = [
-      FoodData('Protein', ((widget.protein/widget.totalWeight)*100).round()),
-      FoodData('none', 100-((widget.protein/widget.totalWeight)*100).round()),
+      FoodData(
+          'Protein', ((widget.protein / widget.totalWeight) * 100).round()),
+      FoodData(
+          'none', 100 - ((widget.protein / widget.totalWeight) * 100).round()),
     ];
 
     final List<FoodData> allData = [

@@ -52,6 +52,7 @@ class _TotalRecipesState extends State<TotalRecipes> {
                           widget.recipies[index].sugar,
                           widget.recipies[index].fat,
                           widget.recipies[index].protein,
+                          widget.recipies[index].ingredientLines,
 
                         ));
                   })),
