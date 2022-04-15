@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-
-import 'myData/IngredientsData.dart';
+import '../myData/IngredientsData.dart';
+import '../Models/Ingredient.dart';
+import '../Widgets/SearchRecipeButton.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
-  List<String> recognizedIngredients = [];
+ // List<String> recognizedIngredients = [];
 
   @override
   void initState() {
@@ -63,15 +64,26 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     List<String> allIngredients = getAllIngredientsName();
     print(result.recognizedWords);
-    List recognizedWordsList = result.recognizedWords.split(' ');
-
-    if (allIngredients.contains(recognizedWordsList.last)) {
-      if(!recognizedIngredients.contains(recognizedWordsList.last)) {
-        setState(() {
-        recognizedIngredients.add(recognizedWordsList.last);
+    List<String> recognizedWordsList = result.recognizedWords.split(' ');
+    String lastIngredientName = recognizedWordsList.last;
+    //check if the pronounced ingredient exists in our data
+    if (allIngredients.contains(lastIngredientName)) {
+      print("cond1");
+      //check if the ingredient is not selected already
+      if(!IngredientView.selectedIngredientsNames.contains(lastIngredientName)) {
+        print("cond2");
+        //fetch the ingredient from data and construct it as a view to add it to the selectedIngredients list
+       Ingredient newSelected = ingredientsData.firstWhere((element) => element.ingrName.toLowerCase()==lastIngredientName);
+       print(newSelected.ingrName);
+       setState(() {
+        IngredientView.addToSelectedIngredients(newSelected);
       });
-        print("recognized ingredients array:");
-        print(recognizedIngredients);
+        print("recognized ingredients names array:");
+        print(IngredientView.selectedIngredientsNames);
+        print(IngredientView.selectedIngredients);
+        setState(() {
+
+        });
       }
       }else
       print('not an ingredient');
@@ -107,12 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(16),
                 child: Wrap(
                   children: [
-                    for(var j in recognizedIngredients)
+                    for(var j in IngredientView.selectedIngredientsNames)
                       Chip(label: Text(j),)
                   ],
                 ),
                 ),
-
+              SearchRecipeButton()
           ],
         ),
       ),

@@ -42,7 +42,7 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             print("this is json Data $jsonData");
             jsonData["hits"]?.forEach((element) {
               print(element.toString());
-              RecipeModel recipeModel = new RecipeModel('','','','',0,0,0,0,0,0);
+              RecipeModel recipeModel = new RecipeModel('','','','',0,0,0,0,0,0,[]);
               recipeModel =
                   RecipeModel.fromMap(element['recipe']);
               recipies.add(recipeModel);
