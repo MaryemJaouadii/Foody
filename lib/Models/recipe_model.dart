@@ -9,8 +9,9 @@ class RecipeModel {
   int sugar;
   int fat;
   int protein;
+  List ingredientLines;
 
-  RecipeModel( this.url,  this.source,  this.image,  this.label, this.calories, this.totalWeight,this.totalTime,this.sugar, this.fat,this.protein);
+  RecipeModel( this.url,  this.source,  this.image,  this.label, this.calories, this.totalWeight,this.totalTime,this.sugar, this.fat,this.protein, this.ingredientLines);
 
   factory RecipeModel.fromMap(Map<String,dynamic> parsedJson) {
     return RecipeModel(
@@ -19,6 +20,8 @@ class RecipeModel {
         parsedJson["totalNutrients"]["SUGAR"]["quantity"].round(),
         parsedJson["totalNutrients"]["FAT"]["quantity"].round(),
         parsedJson["totalNutrients"]["PROCNT"]["quantity"].round(),
+        parsedJson["ingredientLines"]
+
     );
   }
 }

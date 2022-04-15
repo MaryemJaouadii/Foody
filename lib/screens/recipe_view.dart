@@ -4,34 +4,30 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 class RecipeView extends StatefulWidget {
   final String postUrl;
-  const RecipeView(this.postUrl) ;
+  const RecipeView(this.postUrl);
 
   @override
   State<RecipeView> createState() => _RecipeViewState();
 }
 
 class _RecipeViewState extends State<RecipeView> {
-
-
   late String finalUrl;
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
 
   @override
   void initState() {
-    if(widget.postUrl.contains("http://")) {
-      finalUrl=widget.postUrl.replaceAll("http://", "https://");
-    }
-    else {
+    if (widget.postUrl.contains("http://")) {
+      finalUrl = widget.postUrl.replaceAll("http://", "https://");
+    } else {
       finalUrl = widget.postUrl;
     }
 
     super.initState();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +39,8 @@ class _RecipeViewState extends State<RecipeView> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
-                  mainAxisAlignment: kIsWeb? MainAxisAlignment.start: MainAxisAlignment.end,
+                  mainAxisAlignment:
+                      kIsWeb ? MainAxisAlignment.start : MainAxisAlignment.end,
                   children: [
                     Text(
                       'AppGuy',
@@ -60,11 +57,8 @@ class _RecipeViewState extends State<RecipeView> {
                   onWebViewCreated: (WebViewController webViewController) {
                     setState(() {
                       _controller.complete(webViewController);
-
                     });
                   },
-
-
                 ),
               )
             ],

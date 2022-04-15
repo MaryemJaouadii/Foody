@@ -8,8 +8,9 @@ import 'package:url_launcher/url_launcher.dart';
 class RecipieTile extends StatefulWidget {
   final String title, desc, imgUrl, url ;
   final int  calories , totalWeight, totalTime,sugar, fat,protein;
+  final List ingredientLines;
 
-  RecipieTile(this.title, this.desc, this.imgUrl, this.url, this.calories, this.totalWeight,this.totalTime,this.sugar, this.fat,this.protein);
+  RecipieTile(this.title, this.desc, this.imgUrl, this.url, this.calories, this.totalWeight,this.totalTime,this.sugar, this.fat,this.protein, this.ingredientLines);
 
   @override
   _RecipieTileState createState() => _RecipieTileState();
@@ -39,7 +40,7 @@ class _RecipieTileState extends State<RecipieTile> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => MoreInfo(
-                          widget.title, widget.desc, widget.imgUrl, widget.url, widget.calories, widget.totalWeight,widget.totalTime,widget.sugar, widget.fat,widget.protein
+                          widget.title, widget.desc, widget.imgUrl, widget.url, widget.calories, widget.totalWeight,widget.totalTime,widget.sugar, widget.fat,widget.protein, widget.ingredientLines
                       )));
             }
           },
