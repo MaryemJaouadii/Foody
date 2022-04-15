@@ -127,6 +127,8 @@ import 'package:flutter/material.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
+import 'package:foodproject/screens/moreInfo.dart';
+import 'package:foodproject/screens/totalRecipes.dart';
 import 'package:provider/provider.dart';
 
 
@@ -189,8 +191,8 @@ class _SplashScreenState extends State<SplashScreen> {
               width: MediaQuery.of(context).size.width,
 
             ),
-            Padding(
-              padding: const EdgeInsets.only(top:600.0),
+            const Padding(
+              padding: EdgeInsets.only(top:600.0),
               child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,),
             ),
 
@@ -228,6 +230,7 @@ class _HomePageState extends State<HomePage> {
         LoginTab.id: (context)=>LoginTab(),
         RegisterTab.id: (context)=>RegisterTab(),
         HomeScreen.id: (context)=>HomeScreen(),
+
 
 
 

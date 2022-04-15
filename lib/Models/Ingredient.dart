@@ -22,6 +22,13 @@ class IngredientView extends ChangeNotifier{
    // notifyListeners();
   }
 
+ static String getTotalIngredients() {
+    String tot='';
+    for (var i in selectedIngredients)
+      tot+=i.ingrName+ ' ';
+    return tot;
+  }
+
 }
 
 

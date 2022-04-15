@@ -3,8 +3,12 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class MoreInfo extends StatefulWidget {
-  static const String id = 'moreinfo';
-  const MoreInfo({Key? key}) : super(key: key);
+
+  final String title, desc, imgUrl, url, calories , totalWeight, totalTime ;
+  final Object energy, fat,protein;
+
+  MoreInfo(this.title, this.desc, this.imgUrl, this.url, this.calories, this.totalWeight,this.totalTime,this.energy, this.fat,this.protein);
+
 
   @override
   State<MoreInfo> createState() => _MoreInfoState();
