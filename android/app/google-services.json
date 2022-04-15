@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "771591901354",
+    "project_id": "fitfood-1f803",
+    "storage_bucket": "fitfood-1f803.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771591901354:android:ec00f97560017a5f0e00d3",
+        "android_client_info": {
+          "package_name": "com.example.foodproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771591901354-mgobinhh8sqvqok0blufivjmoh3ihbf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_wJ2_hxFmejQsmXD1YB-bXYJh2QYbkPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771591901354-mgobinhh8sqvqok0blufivjmoh3ihbf4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
