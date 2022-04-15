@@ -35,8 +35,7 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             recipies = new List<RecipeModel>.empty(growable: true);
             String url =
                 "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012";
-            var response = await http.get(Uri.parse(url)
-            );
+            var response = await http.get(Uri.parse(url));
             print(" $response this is response");
             Map<String, dynamic> jsonData = jsonDecode(response.body) ;
             print("this is json Data $jsonData");

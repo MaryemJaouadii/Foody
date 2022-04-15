@@ -120,7 +120,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Wrap(
                   children: [
                     for(var j in IngredientView.selectedIngredientsNames)
-                      Chip(label: Text(j),)
+                      Chip(label: Text(j),
+                      onDeleted: () {
+                        setState(() {
+                          IngredientView.removeFromSelectedIngredientsByName(j);
+                        });
+                      },
+                      )
                   ],
                 ),
                 ),

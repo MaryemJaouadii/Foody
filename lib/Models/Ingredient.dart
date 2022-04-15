@@ -28,9 +28,7 @@ class IngredientView{
   static get selectedIngredientsNames => UnmodifiableListView(_selectedIngredientsNames);
 
   static addToSelectedIngredients(Ingredient ingredient){
-    print(selectedIngredientsNames);
     if(!selectedIngredients.contains(ingredient)) {
-      print("passed first cond");
       _selectedIngredients.add(ingredient);
       _selectedIngredientsNames.add(ingredient.ingrName.toLowerCase());
     }
@@ -40,6 +38,13 @@ class IngredientView{
     if(selectedIngredients.contains(ingredient)) {
       _selectedIngredients.remove(ingredient);
       _selectedIngredientsNames.remove(ingredient.ingrName.toLowerCase());
+    }
+  }
+
+  static removeFromSelectedIngredientsByName(String name){
+    if(_selectedIngredientsNames.contains(name)) {
+      _selectedIngredientsNames.remove(name);
+      _selectedIngredients.removeWhere((element) => element.ingrName.toLowerCase()==name);
     }
   }
 
