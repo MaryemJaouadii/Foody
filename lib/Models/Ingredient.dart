@@ -16,8 +16,7 @@ class IngredientView{
   IngredientView(this.ingredient);
   //IMPORTANT
   /*
-  *You cannot access to [_selectedIngredients] and [_selectedIngredientsNames] directly
-  *and you cannot use the method .add or .remove on their get methods
+  *you cannot use the method .add or .remove on selectedIngredients get methods
   *if you want to add or remove an item please use addToSelectedIngredients or removeFromSelectedIngredients
   *you  still can use other boolean methods as long as they don't modify the list
    */

@@ -23,15 +23,16 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
           borderRadius: BorderRadius.circular(15.0)),
       child: OutlinedButton(
         onPressed: () async {
+          print("entered in button");
           String tot='';
-          for (var i in IngredientView.selectedIngredients)
-            tot+=i.ingrName+ ' ';
-          print(tot);
 
           if (IngredientView.selectedIngredients.isNotEmpty) {
             setState(() {
               loading = true;
             });
+            tot=IngredientView.selectedIngredientsNames.join(' ');
+            print("**********************");
+            print(tot);
             recipies = new List<RecipeModel>.empty(growable: true);
             String url =
                 "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012";
@@ -57,9 +58,9 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             print("not doing it");
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: const Text('Go on!',
+        child: const Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text('Go on!',
               style: TextStyle(
                 // fontWeight: FontWeight.bold,
                 color: Colors.white,
