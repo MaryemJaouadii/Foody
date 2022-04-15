@@ -26,3 +26,11 @@ final kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
   ),
 );
+
+
+
+final kFoodHealthDetailsStyle = TextStyle(
+    color: Colors.black.withOpacity(0.5),
+    fontSize: 15,
+    fontFamily: 'Poppins-Regular',
+    decoration: TextDecoration.none);

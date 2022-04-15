@@ -49,7 +49,7 @@ class _TotalRecipesState extends State<TotalRecipes> {
                           widget.recipies[index].calories,
                           widget.recipies[index].totalWeight,
                           widget.recipies[index].totalTime,
-                          widget.recipies[index].energy,
+                          widget.recipies[index].sugar,
                           widget.recipies[index].fat,
                           widget.recipies[index].protein,
 

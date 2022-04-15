@@ -1,31 +1,33 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
+import '../constants.dart';
+
 class MoreInfo extends StatefulWidget {
+  final String title, desc, imgUrl, url ;
+  final int  calories , totalWeight, totalTime,sugar, fat,protein;
 
-  final String title, desc, imgUrl, url, calories , totalWeight, totalTime ;
-  final Object energy, fat,protein;
-
-  MoreInfo(this.title, this.desc, this.imgUrl, this.url, this.calories, this.totalWeight,this.totalTime,this.energy, this.fat,this.protein);
-
+  MoreInfo(this.title, this.desc, this.imgUrl, this.url, this.calories,
+      this.totalWeight, this.totalTime, this.sugar, this.fat, this.protein);
 
   @override
   State<MoreInfo> createState() => _MoreInfoState();
 }
 
 class _MoreInfoState extends State<MoreInfo> {
-  late List<FoodData> _carbsData;
+  late List<FoodData> _sugarData;
   late List<FoodData> _fatData;
   late List<FoodData> _proteinData;
   late List<FoodData> _allData;
 
   @override
   void initState() {
-    _carbsData=getChartData('carbs')!;
-    _fatData=getChartData('fat')!;
-    _proteinData=getChartData('protein')!;
-    _allData=getChartData('all')!;
+    _sugarData = getChartData('sugar')!;
+    _fatData = getChartData('fat')!;
+    _proteinData = getChartData('protein')!;
+    _allData = getChartData('all')!;
     super.initState();
   }
 
@@ -34,8 +36,16 @@ class _MoreInfoState extends State<MoreInfo> {
     return Stack(
       children: [
         Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [Image.asset("images/saladmix.jpg")]),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.network(
+              widget.imgUrl,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
         DraggableScrollableSheet(
           initialChildSize: 0.60,
           //maxChildSize: 0.7,
@@ -55,158 +65,143 @@ class _MoreInfoState extends State<MoreInfo> {
                       controller: scrollController,
                       children: [
                         Text(
-                          'Salad Mix',
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 20,
-                              fontFamily: 'Poppins',
-                              decoration: TextDecoration.none),
+                          widget.title,
+                          style:kFoodHealthDetailsStyle.copyWith(color: Colors.black.withOpacity(0.7),
+                              fontSize: 20),
                         ),
                         Text(
-                          '1 Bowl (300 g)',
+                          '1 Bowl ('+ widget.totalWeight.toString() +' g)',
                           style: TextStyle(
                               color: Colors.black.withOpacity(0.3),
                               fontSize: 15,
                               fontFamily: 'Poppins',
                               decoration: TextDecoration.none),
                         ),
-
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Column(
                               children: [
-                                Text('Carbs', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text('sugar',
+                                    style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
-                                  width: 80,  // width of the Container widget
+                                  width: 80, // width of the Container widget
                                   child: SfCircularChart(
-                                    palette: <Color>[Color(0xFF2fb668),Color(0xFFb8efd0) ],
+                                    palette: <Color>[
+                                      Color(0xFF2fb668),
+                                      Color(0xFFb8efd0)
+                                    ],
                                     // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
                                     series: <CircularSeries>[
-                                      DoughnutSeries<FoodData,String>(
-                                        dataSource: _carbsData,
-                                        xValueMapper: (FoodData data,_)=> data.content,
-                                        yValueMapper: (FoodData data,_)=> data.quantity,
+                                      DoughnutSeries<FoodData, String>(
+                                        dataSource: _sugarData,
+                                        xValueMapper: (FoodData data, _) =>
+                                            data.content,
+                                        yValueMapper: (FoodData data, _) =>
+                                            data.quantity,
                                         //dataLabelSettings: DataLabelSettings(isVisible: true)
                                       )
                                     ],
-
                                   ),
                                 ),
-                                Text(_carbsData[0].quantity.toString()+' g', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text(_sugarData[0].quantity.toString() + ' g',
+                                    style: kFoodHealthDetailsStyle),
                               ],
                             ),
-
                             Column(
                               children: [
-                                Text('Fat', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text('fat',
+                                    style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
-                                  width: 80,  // width of the Container widget
+                                  width: 80, // width of the Container widget
                                   child: SfCircularChart(
-                                    palette: <Color>[Color(0xFFf84f49),Color(0xFFf3cfcc) ],
+                                    palette: <Color>[
+                                      Color(0xFFf84f49),
+                                      Color(0xFFf3cfcc)
+                                    ],
                                     // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
                                     series: <CircularSeries>[
-                                      DoughnutSeries<FoodData,String>(
+                                      DoughnutSeries<FoodData, String>(
                                         dataSource: _fatData,
-                                        xValueMapper: (FoodData data,_)=> data.content,
-                                        yValueMapper: (FoodData data,_)=> data.quantity,
+                                        xValueMapper: (FoodData data, _) =>
+                                            data.content,
+                                        yValueMapper: (FoodData data, _) =>
+                                            data.quantity,
                                         //dataLabelSettings: DataLabelSettings(isVisible: true)
                                       )
                                     ],
-
                                   ),
                                 ),
-                                Text(_fatData[0].quantity.toString()+' g', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text(_fatData[0].quantity.toString() + ' g',
+                                    style: kFoodHealthDetailsStyle),
                               ],
                             ),
-
                             Column(
                               children: [
-                                Text('Protein', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text('protein',
+                                    style:kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
-                                  width: 80,  // width of the Container widget
+                                  width: 80, // width of the Container widget
                                   child: SfCircularChart(
-                                    palette: <Color>[Color(0xFFfd9c26),Color(0xFFffe9b1) ],
+                                    palette: <Color>[
+                                      Color(0xFFfd9c26),
+                                      Color(0xFFffe9b1)
+                                    ],
                                     // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
                                     series: <CircularSeries>[
-                                      DoughnutSeries<FoodData,String>(
+                                      DoughnutSeries<FoodData, String>(
                                         dataSource: _proteinData,
-                                        xValueMapper: (FoodData data,_)=> data.content,
-                                        yValueMapper: (FoodData data,_)=> data.quantity,
+                                        xValueMapper: (FoodData data, _) =>
+                                            data.content,
+                                        yValueMapper: (FoodData data, _) =>
+                                            data.quantity,
                                         //dataLabelSettings: DataLabelSettings(isVisible: true)
                                       )
                                     ],
-
                                   ),
                                 ),
-                                Text(_proteinData[0].quantity.toString()+' g', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text(_proteinData[0].quantity.toString() + ' g' ,
+                                    style: kFoodHealthDetailsStyle),
                               ],
                             ),
-
                             Column(
                               children: [
-                                Text('Calories', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text('calories',
+                                    style: kFoodHealthDetailsStyle),
                                 Container(
                                   height: 90, // height of the Container widget
-                                  width: 80,  // width of the Container widget
+                                  width: 80, // width of the Container widget
                                   child: SfCircularChart(
-                                    palette: <Color>[Color(0xFF2fb668),Color(0xFFf84f49), Color(0xFFfd9c26) ],
+                                    palette: <Color>[
+                                      Color(0xFF2fb668),
+                                      Color(0xFFf84f49),
+                                      Color(0xFFfd9c26)
+                                    ],
                                     // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
                                     series: <CircularSeries>[
-                                      DoughnutSeries<FoodData,String>(
+                                      DoughnutSeries<FoodData, String>(
                                         dataSource: _allData,
-                                        xValueMapper: (FoodData data,_)=> data.content,
-                                        yValueMapper: (FoodData data,_)=> data.quantity,
+                                        xValueMapper: (FoodData data, _) =>
+                                            data.content,
+                                        yValueMapper: (FoodData data, _) =>
+                                            data.quantity,
                                         //dataLabelSettings: DataLabelSettings(isVisible: true)
                                       )
                                     ],
-
                                   ),
                                 ),
-                                Text('320 '+' Kkl', style: TextStyle(
-                                    color: Colors.black.withOpacity(0.5),
-                                    fontSize: 15,
-                                    fontFamily: 'Poppins',
-                                    decoration: TextDecoration.none)),
+                                Text(widget.calories.toString() + ' Kkl',
+                                    style: kFoodHealthDetailsStyle),
                               ],
                             ),
-
-
                           ],
                         ),
-
                       ],
                     ),
                   ],
@@ -217,34 +212,34 @@ class _MoreInfoState extends State<MoreInfo> {
     );
   }
 
-
   List<FoodData>? getChartData(String axe) {
-    final List<FoodData> carbsData= [
-      FoodData('Carbs', 37),
-      FoodData('none', 63),
+    final List<FoodData> sugarData = [
+      FoodData('sugar', ((widget.sugar/widget.totalWeight)*100).round()  ),
+      FoodData('none', 100-((widget.sugar/widget.totalWeight)*100).round()),
     ];
-    final List<FoodData> fatData= [
-      FoodData('Fat', 26),
-      FoodData('none', 74),
+    final List<FoodData> fatData = [
+      FoodData('fat', ((widget.fat/widget.totalWeight)*100).round()),
+      FoodData('none', 100-((widget.fat/widget.totalWeight)*100).round()),
     ];
-    final List<FoodData> proteinData= [
-      FoodData('Protein', 45),
-      FoodData('none', 55),
+    final List<FoodData> proteinData = [
+      FoodData('Protein', ((widget.protein/widget.totalWeight)*100).round()),
+      FoodData('none', 100-((widget.protein/widget.totalWeight)*100).round()),
     ];
 
-    final List<FoodData> allData= [
-      FoodData('Carbs', 37),
-      FoodData('Fat', 26),
-      FoodData('Protein', 45),
+    final List<FoodData> allData = [
+      FoodData('sugar', widget.sugar),
+      FoodData('fat', widget.fat),
+      FoodData('Protein', widget.protein),
     ];
-    return
-      axe=='carbs'? carbsData :
-      axe=='fat'?  fatData :
-      axe== 'protein'? proteinData :allData;
+    return axe == 'sugar'
+        ? sugarData
+        : axe == 'fat'
+            ? fatData
+            : axe == 'protein'
+                ? proteinData
+                : allData;
   }
-
 }
-
 
 class FoodData {
   FoodData(this.content, this.quantity);
