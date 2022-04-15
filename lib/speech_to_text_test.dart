@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import 'myData/IngredientsData.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
-  String _lastWords = '';
+  List<String> recognizedIngredients = [];
 
   @override
   void initState() {
@@ -42,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Each time to start a speech recognition session
   void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult);
+    await _speechToText.listen(
+        onResult: _onSpeechResult);
     setState(() {});
   }
 
@@ -58,54 +61,67 @@ class _MyHomePageState extends State<MyHomePage> {
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
   void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
-      _lastWords = result.recognizedWords;
-    });
+    List<String> allIngredients = getAllIngredientsName();
+    print(result.recognizedWords);
+    List recognizedWordsList = result.recognizedWords.split(' ');
+
+    if (allIngredients.contains(recognizedWordsList.last)) {
+      if(!recognizedIngredients.contains(recognizedWordsList.last)) {
+        setState(() {
+        recognizedIngredients.add(recognizedWordsList.last);
+      });
+        print("recognized ingredients array:");
+        print(recognizedIngredients);
+      }
+      }else
+      print('not an ingredient');
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Speech Demo'),
+        title: Text('Use your voice'),//, Dictate many ingredients at once
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(16),
-              child: Text(
-                'Recognized words:',
+              child: const Text(
+                'Recognized ingredients:',
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  // If listening is active show the recognized words
-                  _speechToText.isListening
-                      ? '$_lastWords'
-                  // If listening isn't active but could be tell the user
-                  // how to start it, otherwise indicate that speech
-                  // recognition is not yet ready or not supported on
-                  // the target device
-                      : _speechEnabled
-                      ? 'Tap the microphone to start listening...'
-                      : 'Speech not available',
-                ),
-              ),
+            SizedBox(
+              height: 20,
             ),
+            Text(_speechToText.isListening
+                ? ''
+                : _speechEnabled
+                    ? 'Tap the microphone to start listening...'
+                    : 'Speech not available'),
+            Container(
+                padding: EdgeInsets.all(16),
+                child: Wrap(
+                  children: [
+                    for(var j in recognizedIngredients)
+                      Chip(label: Text(j),)
+                  ],
+                ),
+                ),
+
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:
-        // If not yet listening for speech start, otherwise stop
-        _speechToText.isNotListening ? _startListening : _stopListening,
+            // If not yet listening for speech start, otherwise stop
+            _speechToText.isNotListening ? _startListening : _stopListening,
         tooltip: 'Listen',
-        child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
+        child: Icon(_speechToText.isListening ? Icons.mic : Icons.mic_off),
       ),
     );
   }
