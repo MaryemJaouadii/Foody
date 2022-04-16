@@ -7,22 +7,30 @@ import '../screens/recipe_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RecipieTile extends StatefulWidget {
-  final String title, desc, imgUrl, url;
-  final int calories, totalWeight, totalTime, sugar, fat, protein;
-  final List ingredientLines;
+
+  final RecipeModel recipe;
+
+  // final String title, desc, imgUrl, url;
+  // final int calories, totalWeight, totalTime, sugar, fat, protein;
+  // final List ingredientLines;
 
   RecipieTile(
-      this.title,
-      this.desc,
-      this.imgUrl,
-      this.url,
-      this.calories,
-      this.totalWeight,
-      this.totalTime,
-      this.sugar,
-      this.fat,
-      this.protein,
-      this.ingredientLines);
+
+      this.recipe
+
+      // this.title,
+      // this.desc,
+      // this.imgUrl,
+      // this.url,
+      // this.calories,
+      // this.totalWeight,
+      // this.totalTime,
+      // this.sugar,
+      // this.fat,
+      // this.protein,
+      // this.ingredientLines
+
+      );
 
   @override
   _RecipieTileState createState() => _RecipieTileState();
@@ -47,24 +55,14 @@ class _RecipieTileState extends State<RecipieTile> {
         GestureDetector(
           onTap: () {
             if (kIsWeb) {
-              _launchURL(widget.url);
+              _launchURL(widget.recipe.url);
             } else {
-              print(widget.url + " this is what we are going to see");
+              print(widget.recipe.url + " this is what we are going to see");
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => MoreInfo(
-                          widget.title,
-                          widget.desc,
-                          widget.imgUrl,
-                          widget.url,
-                          widget.calories,
-                          widget.totalWeight,
-                          widget.totalTime,
-                          widget.sugar,
-                          widget.fat,
-                          widget.protein,
-                          widget.ingredientLines)));
+                          widget.recipe)));
             }
           },
           child: Container(
@@ -75,7 +73,7 @@ class _RecipieTileState extends State<RecipieTile> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.network(
-                    widget.imgUrl,
+                    widget.recipe.image,
                     height: 200,
                     width: 200,
                     fit: BoxFit.cover,
@@ -100,7 +98,7 @@ class _RecipieTileState extends State<RecipieTile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.title,
+                          widget.recipe.label,
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.white,
@@ -109,7 +107,7 @@ class _RecipieTileState extends State<RecipieTile> {
                           ),
                         ),
                         Text(
-                          '1 Bowl ('+widget.totalWeight.toString()+' g)',
+                          '1 Bowl ('+widget.recipe.totalWeight.toString()+' g)',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white.withOpacity(0.7),

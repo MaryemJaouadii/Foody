@@ -57,17 +57,8 @@ class _TotalRecipesState extends State<TotalRecipes> {
                           child: Stack(
                             children: [
                               RecipieTile(
-                                widget.recipies[index].source,
-                                widget.recipies[index].label,
-                                widget.recipies[index].image,
-                                widget.recipies[index].url,
-                                widget.recipies[index].calories,
-                                widget.recipies[index].totalWeight,
-                                widget.recipies[index].totalTime,
-                                widget.recipies[index].sugar,
-                                widget.recipies[index].fat,
-                                widget.recipies[index].protein,
-                                widget.recipies[index].ingredientLines,
+                                widget.recipies[index]
+
 
                               ),
                               Align(

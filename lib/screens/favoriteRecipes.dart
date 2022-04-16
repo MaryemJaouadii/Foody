@@ -49,17 +49,7 @@ class _FavoriteRecipesState extends State<FavoriteRecipes> {
                              child: Stack(
                                children: [
                                  RecipieTile(
-                                   FavoriteRecipeView.favoriteRecipes[index].source,
-                                   FavoriteRecipeView.favoriteRecipes[index].label,
-                                   FavoriteRecipeView.favoriteRecipes[index].image,
-                                   FavoriteRecipeView.favoriteRecipes[index].url,
-                                   FavoriteRecipeView.favoriteRecipes[index].calories,
-                                   FavoriteRecipeView.favoriteRecipes[index].totalWeight,
-                                   FavoriteRecipeView.favoriteRecipes[index].totalTime,
-                                   FavoriteRecipeView.favoriteRecipes[index].sugar,
-                                   FavoriteRecipeView.favoriteRecipes[index].fat,
-                                   FavoriteRecipeView.favoriteRecipes[index].protein,
-                                   FavoriteRecipeView.favoriteRecipes[index].ingredientLines,
+                                   FavoriteRecipeView.favoriteRecipes[index]
 
                                  ),
 
