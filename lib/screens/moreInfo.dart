@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodproject/screens/recipe_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../Models/recipe_model.dart';
+import '../Widgets/roundedButton.dart';
 import '../constants.dart';
 
 class MoreInfo extends StatefulWidget {
@@ -261,7 +263,19 @@ class _MoreInfoState extends State<MoreInfo> {
                                   ),
                                 ),
                             ],
-                          )
+                          ),
+                          RoundedButton(
+                            'See Full Recipe',
+                              () {
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RecipeView(widget.recipe.url)),
+                                );
+
+
+                              }
+                          ),
                         ],
                       ),
 
@@ -270,7 +284,7 @@ class _MoreInfoState extends State<MoreInfo> {
                         child: CircleAvatar(
                           radius: 20,
                           backgroundColor:  FavoriteRecipeView.favoriteRecipes
-                              .contains(widget.recipe)?  Color(0xFFfb3b60) :  Colors.black.withOpacity(0.3),
+                              .contains(widget.recipe)?  kPrimaryColor :  Colors.black.withOpacity(0.3),
                           child: IconButton(
                             icon: Icon(Iconsax.heart, color: Colors.white,size: 20),
                             onPressed: () {

@@ -38,7 +38,7 @@ class _LoginTabState extends State<LoginTab> {
             padding: const EdgeInsets.all(30.0),
             child: ListView(
               children: [
-                Center(
+                const Center(
                   child: Image(
                     height: 200,
                     width: 200,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodproject/constants.dart';
 import 'package:foodproject/screens/favoriteRecipes.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:path/path.dart';
@@ -66,7 +67,7 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: IconButton(
             icon: Icon(
               Iconsax.heart,
-             color: ModalRoute.of(context)?.settings.name == 'favorite'? Color(0xFFfb3b60): Colors.black45,
+             color: ModalRoute.of(context)?.settings.name == 'favorite'? kPrimaryColor: Colors.black45,
             ),
             onPressed: () {
               ModalRoute.of(context)?.settings.name != 'favorite'? Navigator.pushNamed(context, FavoriteRecipes.id): null;
