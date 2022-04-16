@@ -2,6 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 
+import '../myData/IngredientsData.dart';
+
 class Ingredient{
   String ingrId;
   String ingrName;
@@ -32,6 +34,14 @@ class IngredientView{
       _selectedIngredientsNames.add(ingredient.ingrName.toLowerCase());
     }
   }
+
+  static addToSelectedIngredientsByName(String name){
+    if(!selectedIngredientsNames.contains(name)) {
+      _selectedIngredients.add(ingredientsData.firstWhere((element) => element.ingrName.toLowerCase()==name));
+      _selectedIngredientsNames.add(name);
+    }
+  }
+
 
   static removeFromSelectedIngredients(Ingredient ingredient){
     if(selectedIngredients.contains(ingredient)) {
