@@ -78,15 +78,9 @@ class _FavoriteRecipesState extends State<FavoriteRecipes> {
                                        child: IconButton(
                                          icon: Icon(Iconsax.heart, color: Colors.white,size: 14),
                                          onPressed: () {
-
-                                           if(FavoriteRecipeView.favoriteRecipes.contains(FavoriteRecipeView.favoriteRecipes[index])) {
-                                             FavoriteRecipeView.removeFromSelectedIngredients(FavoriteRecipeView.favoriteRecipes[index]);
-
-                                           } else {
-                                             FavoriteRecipeView.addToSelectedIngredients(FavoriteRecipeView.favoriteRecipes[index]);
-
-                                           }
-                                           setState(() {});
+                                           FavoriteRecipeView.removeFromFavoriteRecipes(FavoriteRecipeView.favoriteRecipes[index]);
+                                           setState(() {
+                                           });
                                          },
                                        ),
                                      ),

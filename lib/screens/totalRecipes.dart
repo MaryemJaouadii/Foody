@@ -21,6 +21,12 @@ class _TotalRecipesState extends State<TotalRecipes> {
 
   //List<RecipeModel> favoriteRecipes = new List<RecipeModel>.empty(growable: true);
 
+  @override
+  void initState() {
+  setState(() {
+  });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +82,15 @@ class _TotalRecipesState extends State<TotalRecipes> {
                                       icon: Icon(Iconsax.heart, color: Colors.white,size: 14),
                                       onPressed: () {
 
+                                        setState(() {
+
+                                        });
+
                                         if(FavoriteRecipeView.favoriteRecipes.contains(widget.recipies[index])) {
-                                          FavoriteRecipeView.removeFromSelectedIngredients(widget.recipies[index]);
+                                          FavoriteRecipeView.removeFromFavoriteRecipes(widget.recipies[index]);
 
                                         } else {
-                                          FavoriteRecipeView.addToSelectedIngredients(widget.recipies[index]);
+                                          FavoriteRecipeView.addToFavoriteRecipes(widget.recipies[index]);
 
                                         }
                                         setState(() {});

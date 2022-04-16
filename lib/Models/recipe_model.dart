@@ -44,13 +44,13 @@ class FavoriteRecipeView {
   static get favoriteRecipes => UnmodifiableListView(_favoriteRecipes);
 
 
-  static addToSelectedIngredients(RecipeModel recipee){
+  static addToFavoriteRecipes(RecipeModel recipee){
     if(!favoriteRecipes.contains(recipee)) {
       _favoriteRecipes.add(recipee);
     }
   }
 
-  static removeFromSelectedIngredients(RecipeModel recipee){
+  static removeFromFavoriteRecipes(RecipeModel recipee){
     if(favoriteRecipes.contains(recipee)) {
       _favoriteRecipes.remove(recipee);
     }
