@@ -41,17 +41,25 @@ class _CategoryViewState extends State<CategoryView> {
                     decoration: BoxDecoration(
                         color: IngredientView.selectedIngredients
                                 .contains(i.ingredient)
-                            ? Colors.red
-                            : Colors.blue,
+                            ? Color(0xFFfb3b60)
+                            : Colors.white,
                         border: Border.all(
-                          color: Colors.transparent,
+                            color: IngredientView.selectedIngredients
+                                .contains(i.ingredient)
+                                ? Colors.white
+                                : Color(0xFFfb3b60) ,
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                        borderRadius: BorderRadius.all( Radius.circular(20)),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 5.0),
                       child: Text(i.ingredient.ingrName,
-                          style: TextStyle(fontSize: 14.0)),
+                          style: TextStyle(fontSize: 14.0,
+                              color:IngredientView.selectedIngredients
+                                  .contains(i.ingredient)
+                                  ? Colors.white
+                                  : Color(0xFFfb3b60) )),
                     ),
                   ),
                   onTap: () {

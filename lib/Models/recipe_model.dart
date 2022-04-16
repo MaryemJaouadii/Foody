@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class RecipeModel {
   String label ;
   String image;
@@ -24,4 +26,53 @@ class RecipeModel {
 
     );
   }
+
+
+}
+
+
+
+class FavoriteRecipeView {
+
+
+  RecipeModel recipee ;
+  FavoriteRecipeView(this.recipee) ;
+
+
+  static List<RecipeModel> _favoriteRecipes = [];
+
+  static get favoriteRecipes => UnmodifiableListView(_favoriteRecipes);
+
+
+  static addToSelectedIngredients(RecipeModel recipee){
+    if(!favoriteRecipes.contains(recipee)) {
+      _favoriteRecipes.add(recipee);
+    }
+  }
+
+  static removeFromSelectedIngredients(RecipeModel recipee){
+    if(favoriteRecipes.contains(recipee)) {
+      _favoriteRecipes.remove(recipee);
+    }
+  }
+
+
+
+   setChecked(){
+    if(favoriteRecipes.contains(recipee)) {
+      _favoriteRecipes.remove(recipee);
+
+    } else {
+      _favoriteRecipes.add(recipee);
+
+    }
+  }
+
+
+
+
+
+
+
+
 }

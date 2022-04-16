@@ -5,6 +5,8 @@ import '../Models/recipe_model.dart';
 import 'dart:convert';
 import 'package:foodproject/screens/totalRecipes.dart';
 
+import '../constants.dart';
+
 
 class SearchRecipeButton extends StatefulWidget {
 
@@ -19,7 +21,8 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xFFEA676A),
+          //gradient: kGradientColor,
+        color: Color(0xFFfb3b60),
           borderRadius: BorderRadius.circular(15.0)),
       child: OutlinedButton(
         onPressed: () async {

@@ -1,11 +1,11 @@
 import '../Models/Category.dart';
 
   List categoriesData = [
-    Category("Dp", "images/milk.png", "Eggs and Diary products"),
-    Category("Veg", "images/vegetable.png", "Vegetables"),
-    Category("Spc", "images/spices.png", "Spices, herbs and seeds"),
-    Category("Sg", "images/sugar.png", "Sugar and chocolates"),
-    Category("Fr", "images/fruit.png", "Fruits"),
-    Category("Fl", "images/flour.png", "Flours and yeasts"),
-    Category("Oil", "images/oil.png", "Oils and fats")
+    Category("Dp", "images/dairy2.jpg", "Eggs and Diary products"),
+    Category("Veg", "images/vegetables.jpg", "Vegetables"),
+    Category("Spc", "images/spices.jpg", "Spices, herbs and seeds"),
+    Category("Sg", "images/sugar.jpg", "Sugar and chocolates"),
+    Category("Fr", "images/fruit.jpg", "Fruits"),
+    Category("Fl", "images/flour.jpg", "Flours and yeasts"),
+    Category("Oil", "images/oil.jpg", "Oils and fats")
   ];
