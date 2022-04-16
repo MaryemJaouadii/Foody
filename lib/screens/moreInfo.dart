@@ -54,239 +54,251 @@ class _MoreInfoState extends State<MoreInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.network(
-              widget.recipe.image,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              fit: BoxFit.cover,
-            ),
-          ],
-        ),
-        DraggableScrollableSheet(
-          initialChildSize: 0.60,
-          //maxChildSize: 0.7,
-          builder: (BuildContext context, ScrollController scrollController) {
-            return Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                  ),
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor:  Colors.black.withOpacity(0.3),
-                        child: GestureDetector(
-                          child: Icon(Iconsax.heart, color: Colors.white,size: 20),
-                          onTap: () {
-                          },
-                        ),
-                      ),
+    return Material(
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.network(
+                widget.recipe.image,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+          DraggableScrollableSheet(
+            initialChildSize: 0.60,
+            //maxChildSize: 0.7,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
                     ),
+                  ),
+                  child: Stack(
+                    children: <Widget>[
 
-                    ListView(
-                      padding: const EdgeInsets.all(20),
-                      controller: scrollController,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
+                      ListView(
+                        padding: const EdgeInsets.all(20),
+                        controller: scrollController,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width -50,
+                                child: Text(
                                   widget.recipe.label,
+
                                   style: kFoodHealthDetailsStyle.copyWith(
                                       color: Colors.black.withOpacity(0.7),
                                       fontSize: 20),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '1 Bowl (' +
-                                      widget.recipe.totalWeight.toString() +
-                                      ' g)',
-                                  style: kFoodHealthDetailsStyle.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black.withOpacity(0.3),
-                                      fontSize: 15),
-                                ),
-                              ],
-                            ),
-                           /* TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Add To Favorites',
-                                  style: kFoodHealthDetailsStyle.copyWith(
-                                      color: Color(0xFF4fc17f)),
-                                ))*/
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                Text('sugar', style: kFoodHealthDetailsStyle),
-                                Container(
-                                  height: 90, // height of the Container widget
-                                  width: 80, // width of the Container widget
-                                  child: SfCircularChart(
-                                    palette: <Color>[
-                                      Color(0xFF2fb668),
-                                      Color(0xFFb8efd0)
-                                    ],
-                                    // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
-                                    series: <CircularSeries>[
-                                      DoughnutSeries<FoodData, String>(
-                                        dataSource: _sugarData,
-                                        xValueMapper: (FoodData data, _) =>
-                                            data.content,
-                                        yValueMapper: (FoodData data, _) =>
-                                            data.quantity,
-                                        //dataLabelSettings: DataLabelSettings(isVisible: true)
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(_sugarData[0].quantity.toString() + ' g',
-                                    style: kFoodHealthDetailsStyle),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text('fat', style: kFoodHealthDetailsStyle),
-                                Container(
-                                  height: 90, // height of the Container widget
-                                  width: 80, // width of the Container widget
-                                  child: SfCircularChart(
-                                    palette: <Color>[
-                                      Color(0xFFf84f49),
-                                      Color(0xFFf3cfcc)
-                                    ],
-                                    // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
-                                    series: <CircularSeries>[
-                                      DoughnutSeries<FoodData, String>(
-                                        dataSource: _fatData,
-                                        xValueMapper: (FoodData data, _) =>
-                                            data.content,
-                                        yValueMapper: (FoodData data, _) =>
-                                            data.quantity,
-                                        //dataLabelSettings: DataLabelSettings(isVisible: true)
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(_fatData[0].quantity.toString() + ' g',
-                                    style: kFoodHealthDetailsStyle),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text('protein', style: kFoodHealthDetailsStyle),
-                                Container(
-                                  height: 90, // height of the Container widget
-                                  width: 80, // width of the Container widget
-                                  child: SfCircularChart(
-                                    palette: <Color>[
-                                      Color(0xFFfd9c26),
-                                      Color(0xFFffe9b1)
-                                    ],
-                                    // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
-                                    series: <CircularSeries>[
-                                      DoughnutSeries<FoodData, String>(
-                                        dataSource: _proteinData,
-                                        xValueMapper: (FoodData data, _) =>
-                                            data.content,
-                                        yValueMapper: (FoodData data, _) =>
-                                            data.quantity,
-                                        //dataLabelSettings: DataLabelSettings(isVisible: true)
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(_proteinData[0].quantity.toString() + ' g',
-                                    style: kFoodHealthDetailsStyle),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text('calories',
-                                    style: kFoodHealthDetailsStyle),
-                                Container(
-                                  height: 90, // height of the Container widget
-                                  width: 80, // width of the Container widget
-                                  child: SfCircularChart(
-                                    palette: <Color>[
-                                      Color(0xFF2fb668),
-                                      Color(0xFFf84f49),
-                                      Color(0xFFfd9c26)
-                                    ],
-                                    // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
-                                    series: <CircularSeries>[
-                                      DoughnutSeries<FoodData, String>(
-                                        dataSource: _allData,
-                                        xValueMapper: (FoodData data, _) =>
-                                            data.content,
-                                        yValueMapper: (FoodData data, _) =>
-                                            data.quantity,
-                                        //dataLabelSettings: DataLabelSettings(isVisible: true)
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(widget.recipe.calories.toString() + ' Kkl',
-                                    style: kFoodHealthDetailsStyle),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'What will you need:',
-                              style: kFoodHealthDetailsStyle.copyWith(
-                                  color: Colors.black.withOpacity(0.7),
-                                  fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            for (var i in widget.recipe.ingredientLines)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  i,
-                                  style: kFoodHealthDetailsStyle.copyWith(
-                                      fontWeight: FontWeight.w400),
-                                ),
                               ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ));
-          },
-        ),
-      ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                '1 Bowl (' +
+                                    widget.recipe.totalWeight.toString() +
+                                    ' g)',
+                                style: kFoodHealthDetailsStyle.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black.withOpacity(0.3),
+                                    fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  Text('sugar', style: kFoodHealthDetailsStyle),
+                                  Container(
+                                    height: 90, // height of the Container widget
+                                    width: 80, // width of the Container widget
+                                    child: SfCircularChart(
+                                      palette: <Color>[
+                                        Color(0xFF2fb668),
+                                        Color(0xFFb8efd0)
+                                      ],
+                                      // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
+                                      series: <CircularSeries>[
+                                        DoughnutSeries<FoodData, String>(
+                                          dataSource: _sugarData,
+                                          xValueMapper: (FoodData data, _) =>
+                                              data.content,
+                                          yValueMapper: (FoodData data, _) =>
+                                              data.quantity,
+                                          //dataLabelSettings: DataLabelSettings(isVisible: true)
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(_sugarData[0].quantity.toString() + ' g',
+                                      style: kFoodHealthDetailsStyle),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('fat', style: kFoodHealthDetailsStyle),
+                                  Container(
+                                    height: 90, // height of the Container widget
+                                    width: 80, // width of the Container widget
+                                    child: SfCircularChart(
+                                      palette: <Color>[
+                                        Color(0xFFf84f49),
+                                        Color(0xFFf3cfcc)
+                                      ],
+                                      // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
+                                      series: <CircularSeries>[
+                                        DoughnutSeries<FoodData, String>(
+                                          dataSource: _fatData,
+                                          xValueMapper: (FoodData data, _) =>
+                                              data.content,
+                                          yValueMapper: (FoodData data, _) =>
+                                              data.quantity,
+                                          //dataLabelSettings: DataLabelSettings(isVisible: true)
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(_fatData[0].quantity.toString() + ' g',
+                                      style: kFoodHealthDetailsStyle),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('protein', style: kFoodHealthDetailsStyle),
+                                  Container(
+                                    height: 90, // height of the Container widget
+                                    width: 80, // width of the Container widget
+                                    child: SfCircularChart(
+                                      palette: <Color>[
+                                        Color(0xFFfd9c26),
+                                        Color(0xFFffe9b1)
+                                      ],
+                                      // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
+                                      series: <CircularSeries>[
+                                        DoughnutSeries<FoodData, String>(
+                                          dataSource: _proteinData,
+                                          xValueMapper: (FoodData data, _) =>
+                                              data.content,
+                                          yValueMapper: (FoodData data, _) =>
+                                              data.quantity,
+                                          //dataLabelSettings: DataLabelSettings(isVisible: true)
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(_proteinData[0].quantity.toString() + ' g',
+                                      style: kFoodHealthDetailsStyle),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('calories',
+                                      style: kFoodHealthDetailsStyle),
+                                  Container(
+                                    height: 90, // height of the Container widget
+                                    width: 80, // width of the Container widget
+                                    child: SfCircularChart(
+                                      palette: <Color>[
+                                        Color(0xFF2fb668),
+                                        Color(0xFFf84f49),
+                                        Color(0xFFfd9c26)
+                                      ],
+                                      // legend: Legend(isVisible: true, overflowMode: LegendItemOverflowMode.scroll),
+                                      series: <CircularSeries>[
+                                        DoughnutSeries<FoodData, String>(
+                                          dataSource: _allData,
+                                          xValueMapper: (FoodData data, _) =>
+                                              data.content,
+                                          yValueMapper: (FoodData data, _) =>
+                                              data.quantity,
+                                          //dataLabelSettings: DataLabelSettings(isVisible: true)
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(widget.recipe.calories.toString() + ' Kkl',
+                                      style: kFoodHealthDetailsStyle),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'What will you need:',
+                                style: kFoodHealthDetailsStyle.copyWith(
+                                    color: Colors.black.withOpacity(0.7),
+                                    fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              for (var i in widget.recipe.ingredientLines)
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    i,
+                                    style: kFoodHealthDetailsStyle.copyWith(
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                            ],
+                          )
+                        ],
+                      ),
+
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor:  FavoriteRecipeView.favoriteRecipes
+                              .contains(widget.recipe)?  Color(0xFFfb3b60) :  Colors.black.withOpacity(0.3),
+                          child: IconButton(
+                            icon: Icon(Iconsax.heart, color: Colors.white,size: 20),
+                            onPressed: () {
+
+                              setState(() {
+
+                              });
+
+                              if(FavoriteRecipeView.favoriteRecipes.contains(widget.recipe)) {
+                                FavoriteRecipeView.removeFromFavoriteRecipes(widget.recipe);
+
+                              } else {
+                                FavoriteRecipeView.addToFavoriteRecipes(widget.recipe);
+
+                              }
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+
+
+                    ],
+                  ));
+            },
+          ),
+        ],
+      ),
     );
   }
 
