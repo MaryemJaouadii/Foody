@@ -125,6 +125,7 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodproject/constants.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
@@ -174,7 +175,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 30), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
@@ -186,20 +187,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
 
-        body: Stack(
-          children: [
-            Image.asset(
-              'images/splashscreen.png',
-              width: MediaQuery.of(context).size.width,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: kGradientColor,
+          ),
 
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top:600.0),
-              child: Text("Let's cook your own food and adjust your diet!", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,),
-            ),
+          child: Image.asset(
+            'images/white_version_logo.png',
+            width: MediaQuery.of(context).size.width,
 
-
-          ],
+          ),
         ));
 
 

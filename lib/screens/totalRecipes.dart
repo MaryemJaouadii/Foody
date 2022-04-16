@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodproject/Models/Ingredient.dart';
 import 'package:foodproject/Models/recipe_model.dart';
+import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
 import '../Widgets/myAppBar.dart';
 import '../Widgets/recipe_tile.dart';
@@ -68,7 +69,7 @@ class _TotalRecipesState extends State<TotalRecipes> {
                                   child: CircleAvatar(
                                     radius: 14,
                                     backgroundColor:  FavoriteRecipeView.favoriteRecipes
-                                        .contains(widget.recipies[index])?  Color(0xFFfb3b60) :  Colors.black.withOpacity(0.3),
+                                        .contains(widget.recipies[index])?  kPrimaryColor :  Colors.black.withOpacity(0.3),
                                     child: IconButton(
                                       icon: Icon(Iconsax.heart, color: Colors.white,size: 14),
                                       onPressed: () {

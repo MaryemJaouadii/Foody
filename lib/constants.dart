@@ -37,7 +37,7 @@ final kFoodHealthDetailsStyle = TextStyle(
 
 
 //#f93e65
-final kGradientColor = LinearGradient(
+const kGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end:Alignment.topRight,
   //Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
@@ -47,3 +47,6 @@ final kGradientColor = LinearGradient(
   ], // red to yellow
   //tileMode: TileMode.repeated, // repeats the gradient over the canvas
 );
+
+
+const kPrimaryColor = Color(0xFFfb3b60);
