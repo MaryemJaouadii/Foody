@@ -42,7 +42,7 @@ class _LoginTabState extends State<LoginTab> {
                   child: Image(
                     height: 200,
                     width: 200,
-                    image: AssetImage('images/logo3.png'),
+                    image: AssetImage('images/grey_version_logo.png'),
                   ),
                 ),
                 Padding(
