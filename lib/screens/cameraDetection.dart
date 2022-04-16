@@ -71,9 +71,16 @@ class _CameraDetectionState extends State<CameraDetection> {
         conf=element["confidence"] as double;
         result +=label+" "+conf.toStringAsFixed(2)+"\n\n";
         if(conf >= 0.7){
-          IngredientView.addToSelectedIngredientsByName(label);
+
+          if(!IngredientView.selectedIngredientsNames.contains(label)) {
+            setState(() {
+              IngredientView.addToSelectedIngredientsByName(label);
+            });
+          }
+
 
         }
+        else print("not an ingredient");
       });
       setState(() {
         result;

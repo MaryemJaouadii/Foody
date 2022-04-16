@@ -99,14 +99,16 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
 
         brightness: Brightness.light,
+
       ),
-      initialRoute: HomeScreen.id,
+      initialRoute: CameraDetection.id,
 
       routes: {
         LoginTab.id: (context)=>LoginTab(),
         RegisterTab.id: (context)=>RegisterTab(),
         HomeScreen.id: (context)=>HomeScreen(),
         FavoriteRecipes.id : (context)=>FavoriteRecipes(),
+        CameraDetection.id:(context)=>CameraDetection(),
 
 
 
