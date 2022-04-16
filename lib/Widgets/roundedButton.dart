@@ -19,7 +19,7 @@ class RoundedButton extends StatelessWidget {
           minWidth: 200.0,
           height: 42.0,
           child: Text(text,
-              style: TextStyle(
+              style: const TextStyle(
                fontFamily: 'Poppins',
                 color: Colors.white,
                 fontSize: 20.0,
