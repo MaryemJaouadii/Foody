@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 
 class Ingredient{
@@ -9,17 +11,50 @@ class Ingredient{
   Ingredient(this.ingrId, this.ingrName, this.catId, this.calories);
 }
 
-class IngredientView extends ChangeNotifier{
-  static List<Ingredient> selectedIngredients = [];
+class IngredientView{
   Ingredient ingredient;
-  bool isChecked;
+  IngredientView(this.ingredient);
+  //IMPORTANT
+  /*
+  *you cannot use the method .add or .remove on selectedIngredients get methods
+  *if you want to add or remove an item please use addToSelectedIngredients or removeFromSelectedIngredients
+  *you  still can use other boolean methods as long as they don't modify the list
+   */
+  static List<Ingredient> _selectedIngredients = [];
+  static List<String> _selectedIngredientsNames = [];
 
-  IngredientView(this.ingredient, {this.isChecked = false});
+  static get selectedIngredients => UnmodifiableListView(_selectedIngredients);
+  static get selectedIngredientsNames => UnmodifiableListView(_selectedIngredientsNames);
+
+  static addToSelectedIngredients(Ingredient ingredient){
+    if(!selectedIngredients.contains(ingredient)) {
+      _selectedIngredients.add(ingredient);
+      _selectedIngredientsNames.add(ingredient.ingrName.toLowerCase());
+    }
+  }
+
+  static removeFromSelectedIngredients(Ingredient ingredient){
+    if(selectedIngredients.contains(ingredient)) {
+      _selectedIngredients.remove(ingredient);
+      _selectedIngredientsNames.remove(ingredient.ingrName.toLowerCase());
+    }
+  }
+
+  static removeFromSelectedIngredientsByName(String name){
+    if(_selectedIngredientsNames.contains(name)) {
+      _selectedIngredientsNames.remove(name);
+      _selectedIngredients.removeWhere((element) => element.ingrName.toLowerCase()==name);
+    }
+  }
 
   setChecked(){
-    isChecked=!isChecked;
-    selectedIngredients.contains(ingredient) ? selectedIngredients.remove(ingredient) : selectedIngredients.add(ingredient);
-   // notifyListeners();
+    if(selectedIngredients.contains(ingredient)) {
+      _selectedIngredients.remove(ingredient);
+      _selectedIngredientsNames.remove(ingredient.ingrName.toLowerCase());
+    } else {
+      _selectedIngredients.add(ingredient);
+      _selectedIngredientsNames.add(ingredient.ingrName.toLowerCase());
+    }
   }
 
  static String getTotalIngredients() {

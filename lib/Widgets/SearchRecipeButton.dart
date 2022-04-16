@@ -5,6 +5,8 @@ import '../Models/recipe_model.dart';
 import 'dart:convert';
 import 'package:foodproject/screens/totalRecipes.dart';
 
+import '../constants.dart';
+
 
 class SearchRecipeButton extends StatefulWidget {
 
@@ -19,30 +21,31 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xFFEA676A),
+          //gradient: kGradientColor,
+        color: Color(0xFFfb3b60),
           borderRadius: BorderRadius.circular(15.0)),
       child: OutlinedButton(
         onPressed: () async {
+          print("entered in button");
           String tot='';
-          for (var i in IngredientView.selectedIngredients)
-            tot+=i.ingrName+ ' ';
-          print(tot);
 
           if (IngredientView.selectedIngredients.isNotEmpty) {
             setState(() {
               loading = true;
             });
+            tot=IngredientView.selectedIngredientsNames.join(' ');
+            print("**********************");
+            print(tot);
             recipies = new List<RecipeModel>.empty(growable: true);
             String url =
                 "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012";
-            var response = await http.get(Uri.parse(url)
-            );
+            var response = await http.get(Uri.parse(url));
             print(" $response this is response");
             Map<String, dynamic> jsonData = jsonDecode(response.body) ;
             print("this is json Data $jsonData");
             jsonData["hits"]?.forEach((element) {
               print(element.toString());
-              RecipeModel recipeModel = new RecipeModel('','','','',0,0,0,0,0,0);
+              RecipeModel recipeModel = new RecipeModel('','','','',0,0,0,0,0,0,[]);
               recipeModel =
                   RecipeModel.fromMap(element['recipe']);
               recipies.add(recipeModel);
@@ -58,9 +61,9 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             print("not doing it");
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: const Text('Go on!',
+        child: const Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text('Go on!',
               style: TextStyle(
                 // fontWeight: FontWeight.bold,
                 color: Colors.white,

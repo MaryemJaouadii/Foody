@@ -34,3 +34,16 @@ final kFoodHealthDetailsStyle = TextStyle(
     fontSize: 15,
     fontFamily: 'Poppins-Regular',
     decoration: TextDecoration.none);
+
+
+//#f93e65
+final kGradientColor = LinearGradient(
+  begin: Alignment.topLeft,
+  end:Alignment.topRight,
+  //Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
+  colors: <Color>[
+    Color(0xfff93e65),
+    Color(0xfff9845f)
+  ], // red to yellow
+  //tileMode: TileMode.repeated, // repeats the gradient over the canvas
+);

@@ -128,6 +128,7 @@ import 'package:flutter/material.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
+import 'package:foodproject/screens/favoriteRecipes.dart';
 import 'package:foodproject/screens/moreInfo.dart';
 import 'package:foodproject/screens/totalRecipes.dart';
 import 'package:provider/provider.dart';
@@ -231,6 +232,7 @@ class _HomePageState extends State<HomePage> {
         LoginTab.id: (context)=>LoginTab(),
         RegisterTab.id: (context)=>RegisterTab(),
         HomeScreen.id: (context)=>HomeScreen(),
+        FavoriteRecipes.id : (context)=>FavoriteRecipes(),
 
 
 

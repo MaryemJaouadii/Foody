@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodproject/myData/IngredientsData.dart';
 import '../Widgets/CategoryView.dart';
 import 'package:foodproject/myData/CategoriesData.dart';
 import 'package:searchfield/searchfield.dart';
@@ -11,8 +12,7 @@ class SearchIngredients extends StatefulWidget {
 }
 
 class _SearchIngredientsState extends State<SearchIngredients> {
- // final List<IngredientCategoryView> _items = generateItems();
-  var myList = ['ABC', 'CDE', 'EFG', 'HIJ'];
+  var myList = getAllIngredientsName();
 
 
   @override
