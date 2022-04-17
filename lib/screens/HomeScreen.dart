@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/myAppBar.dart';
 import 'package:foodproject/screens/Profile.dart';
 import 'package:foodproject/screens/favoriteRecipes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '../Models/Ingredient.dart';
 import '../Widgets/SearchIngredients.dart';
@@ -20,16 +21,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
+
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
-  late String username = '';
+  late String username;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     getCurrentUser();
+    getUsers();
   }
 
   void getCurrentUser() async {
@@ -38,16 +46,31 @@ class _HomeScreenState extends State<HomeScreen> {
       if (user != null) {
         loggedInUser = user;
         //print('home screeeeeeeeeen'+loggedInUser.email.toString());
-        username = _firestore
-            .collection('Users')
-            .where('email= ' + loggedInUser.email.toString())
-            .get()
-            .toString();
+       //username= await _firestore.collection('Users').snapshots();
       }
     } catch (e) {
       print(e);
     }
   }
+
+void getUsers()async{
+  await FirebaseFirestore.instance
+      .collection('Users')
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+
+      if (doc["email"]==loggedInUser.email){
+        username=doc["username"];
+        print(doc["username"]);
+      }
+    });
+  });
+}
+
+
+
+
 
   String applicationId = "227f981e";
   String applicationKey = "bc3ecb377a931c694b6b49412d31e012";
@@ -80,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: myAppBar(),
+        appBar: const myAppBar(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           iconSize: 30.0,
