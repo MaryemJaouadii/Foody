@@ -1,15 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:foodproject/screens/totalRecipes.dart';
 import 'package:http/http.dart' as http;
+
 import '../Models/Ingredient.dart';
 import '../Models/recipe_model.dart';
-import 'dart:convert';
-import 'package:foodproject/screens/totalRecipes.dart';
-
 import '../constants.dart';
 
-
 class SearchRecipeButton extends StatefulWidget {
-
   @override
   State<SearchRecipeButton> createState() => _SearchRecipeButtonState();
 }
@@ -22,18 +21,18 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
     return Container(
       decoration: BoxDecoration(
           //gradient: kGradientColor,
-        color: Color(0xFFfb3b60),
+          color: kPrimaryColor,
           borderRadius: BorderRadius.circular(15.0)),
       child: OutlinedButton(
         onPressed: () async {
           print("entered in button");
-          String tot='';
+          String tot = '';
 
           if (IngredientView.selectedIngredients.isNotEmpty) {
             setState(() {
               loading = true;
             });
-            tot=IngredientView.selectedIngredientsNames.join(' ');
+            tot = IngredientView.selectedIngredientsNames.join(' ');
             print("**********************");
             print(tot);
             recipies = new List<RecipeModel>.empty(growable: true);
@@ -41,13 +40,13 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
                 "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012";
             var response = await http.get(Uri.parse(url));
             print(" $response this is response");
-            Map<String, dynamic> jsonData = jsonDecode(response.body) ;
+            Map<String, dynamic> jsonData = jsonDecode(response.body);
             print("this is json Data $jsonData");
             jsonData["hits"]?.forEach((element) {
               print(element.toString());
-              RecipeModel recipeModel = new RecipeModel('','','','',0,0,0,0,0,0,[]);
-              recipeModel =
-                  RecipeModel.fromMap(element['recipe']);
+              RecipeModel recipeModel =
+                  new RecipeModel('', '', '', '', 0, 0, 0, 0, 0, 0, []);
+              recipeModel = RecipeModel.fromMap(element['recipe']);
               recipies.add(recipeModel);
               print(recipeModel.url);
             });
@@ -56,7 +55,10 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             });
 
             print("doing it");
-            Navigator.push(context, MaterialPageRoute(builder: (context) => TotalRecipes(recipies)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TotalRecipes(recipies)));
           } else {
             print("not doing it");
           }

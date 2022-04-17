@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-
 const kGreen = Color(0xFF38bf72);
 const kGrey = Color(0xFF848BA4);
 
-
-final khintStyle= TextStyle(
+final khintStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: kGrey,
 );
-
 
 final kTextFieldDecoration = InputDecoration(
   hintText: 'Type your message here...',
@@ -27,26 +24,20 @@ final kTextFieldDecoration = InputDecoration(
   ),
 );
 
-
-
 final kFoodHealthDetailsStyle = TextStyle(
     color: Colors.black.withOpacity(0.5),
     fontSize: 15,
     fontFamily: 'Poppins-Regular',
     decoration: TextDecoration.none);
 
-
 //#f93e65
 const kGradientColor = LinearGradient(
   begin: Alignment.topLeft,
-  end:Alignment.topRight,
+  end: Alignment.topRight,
   //Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
-  colors: <Color>[
-    Color(0xfff93e65),
-    Color(0xfff9845f)
-  ], // red to yellow
+  colors: <Color>[Color(0xfff93e65), Color(0xfff9845f)], // red to yellow
   //tileMode: TileMode.repeated, // repeats the gradient over the canvas
 );
 
-
 const kPrimaryColor = Color(0xFFfb3b60);
+const kSecondColor = Color(0xfff9845f);

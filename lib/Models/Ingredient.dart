@@ -37,6 +37,8 @@ class IngredientView {
       _selectedIngredients.add(ingredientsData
           .firstWhere((element) => element.ingrName.toLowerCase() == name));
       _selectedIngredientsNames.add(name);
+      print(
+          "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\nadded successfully\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     }
   }
 

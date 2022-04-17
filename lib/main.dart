@@ -1,15 +1,14 @@
-import 'dart:async';
-
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:foodproject/constants.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
 import 'package:foodproject/screens/cameraDetection.dart';
 import 'package:foodproject/screens/favoriteRecipes.dart';
 
-import 'constants.dart';
+import 'screens/SplashScreen.dart';
 
 List<CameraDescription> cameras = {} as List<CameraDescription>;
 
@@ -32,37 +31,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-        gradient: kGradientColor,
-      ),
-      child: Image.asset(
-        'images/white_version_logo.png',
-        width: MediaQuery.of(context).size.width,
-      ),
-    ));
-  }
-}
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -74,10 +42,9 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      theme: ThemeData(
-        brightness: Brightness.light,
-      ),
-      initialRoute: LoginTab.id,
+      theme:
+          ThemeData(brightness: Brightness.light, primaryColor: kSecondColor),
+      initialRoute: HomeScreen.id,
       routes: {
         LoginTab.id: (context) => LoginTab(),
         RegisterTab.id: (context) => RegisterTab(),

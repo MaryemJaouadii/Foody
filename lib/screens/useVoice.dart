@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/myAppBar.dart';
+import 'package:foodproject/constants.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -120,11 +121,14 @@ class _useVoiceState extends State<useVoice> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kSecondColor,
         onPressed:
             // If not yet listening for speech start, otherwise stop
             _speechToText.isNotListening ? _startListening : _stopListening,
         tooltip: 'Listen',
-        child: Icon(_speechToText.isListening ? Icons.mic : Icons.mic_off),
+        child: Icon(
+          _speechToText.isListening ? Icons.mic : Icons.mic_off,
+        ),
       ),
     );
   }

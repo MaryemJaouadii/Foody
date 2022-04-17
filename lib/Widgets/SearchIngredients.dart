@@ -4,6 +4,7 @@ import 'package:foodproject/myData/IngredientsData.dart';
 import 'package:foodproject/screens/cameraDetection.dart';
 import 'package:searchfield/searchfield.dart';
 
+import '../Models/Ingredient.dart';
 import '../Widgets/CategoryView.dart';
 import '../screens/useVoice.dart';
 
@@ -16,6 +17,7 @@ class SearchIngredients extends StatefulWidget {
 
 class _SearchIngredientsState extends State<SearchIngredients> {
   var myList = getAllIngredientsName();
+  late TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +26,33 @@ class _SearchIngredientsState extends State<SearchIngredients> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
           child: SearchField(
+            onSubmit: (e) {
+              if (myList.contains(e)) {
+                setState(() {
+                  IngredientView.addToSelectedIngredientsByName(e);
+                  searchController.clear();
+                });
+              }
+            },
+            controller: searchController,
+            onSuggestionTap: (e) {
+              setState(() {
+                IngredientView.addToSelectedIngredientsByName(
+                    e.item.toString());
+                searchController.clear();
+              });
+            },
             suggestions: myList
                 .map(
-                  (e) => SearchFieldListItem(e),
+                  (e) => SearchFieldListItem<String>(e, item: e),
                 )
                 .toList(),
             searchInputDecoration: InputDecoration(
+              // focusColor: kSecondColor,
+              // focusedBorder: const OutlineInputBorder(
+              //     borderSide: BorderSide(color: kSecondColor)),
               filled: true,
               fillColor: Color(0xFFF5F7FB),
-              // contentPadding: EdgeInsets.symmetric(vertical: 15.0),
               hintText: "Search...",
               prefixIcon: Icon(Icons.search),
               suffixIcon: Row(
@@ -59,7 +79,7 @@ class _SearchIngredientsState extends State<SearchIngredients> {
               ),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(style: BorderStyle.none, width: 1.0)),
+                  borderSide: BorderSide(style: BorderStyle.none, width: 0.1)),
             ),
           ),
         ),
