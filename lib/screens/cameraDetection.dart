@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:tflite/tflite.dart';
 import '../Models/Ingredient.dart';
+import '../Widgets/SearchRecipeButton.dart';
 import '/main.dart';
 import 'package:foodproject/constants.dart';
 class CameraDetection extends StatefulWidget {
@@ -17,6 +18,7 @@ class _CameraDetectionState extends State<CameraDetection> {
 
   bool isWorking=false;
   String result="";
+
   late CameraController cameraController;
   late CameraImage imgCamera;
   String ingredients="";
@@ -69,21 +71,26 @@ class _CameraDetectionState extends State<CameraDetection> {
       recognitions?.forEach((element) {
         label=element["label"];
         conf=element["confidence"] as double;
-        result +=label+" "+conf.toStringAsFixed(2)+"\n\n";
-        if(conf >= 0.7){
+
+
 
           if(!IngredientView.selectedIngredientsNames.contains(label)) {
+            result +=label+" ";
             setState(() {
               IngredientView.addToSelectedIngredientsByName(label);
             });
           }
-
-
-        }
         else print("not an ingredient");
       });
+      if(result==""){
+
+        result="Sorry,we can't detect Ingredients So please try again";
+      }
+
       setState(() {
         result;
+
+
       });
       isWorking=false;
     }
@@ -135,9 +142,10 @@ class _CameraDetectionState extends State<CameraDetection> {
                       ),
                     ),
                   ),
-                )
+                ), Center(child: SearchRecipeButton()),
               ],
             ),
+
           ),
 
         ),
