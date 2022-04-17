@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 5), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
     });
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         gradient: kGradientColor,
       ),
       child: Image.asset(
-        'images/white_version_logo.png',
+        'images/animatedlogo.gif',
         width: MediaQuery.of(context).size.width,
       ),
     ));
