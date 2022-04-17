@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Models/Ingredient.dart';
 import 'package:foodproject/Models/recipe.dart';
@@ -23,12 +25,48 @@ class _TotalRecipesState extends State<TotalRecipes> {
   void initState() {
     setState(() {});
     super.initState();
+    getCurrentUser();
+    getUsers();
+  }
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  late User loggedInUser;
+  late String username='';
+
+
+
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        //print('home screeeeeeeeeen'+loggedInUser.email.toString());
+        //username= await _firestore.collection('Users').snapshots();
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
+  void getUsers()async{
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+
+        if (doc["email"]==loggedInUser.email){
+          username=doc["username"];
+          print(doc["username"]);
+        }
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(),
+      appBar:myAppBar(username),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

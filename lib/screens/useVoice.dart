@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/myAppBar.dart';
 import 'package:foodproject/constants.dart';
@@ -22,9 +24,47 @@ class _useVoiceState extends State<useVoice> {
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
+    getUsers();
     _initSpeech();
+
+
+  }
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  late User loggedInUser;
+  late String username='';
+
+
+
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        //print('home screeeeeeeeeen'+loggedInUser.email.toString());
+        //username= await _firestore.collection('Users').snapshots();
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
+  void getUsers()async{
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+
+        if (doc["email"]==loggedInUser.email){
+          username=doc["username"];
+          print(doc["username"]);
+        }
+      });
+    });
+  }
   /// This has to happen only once per app
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
@@ -79,7 +119,7 @@ class _useVoiceState extends State<useVoice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(),
+      appBar: myAppBar(username),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

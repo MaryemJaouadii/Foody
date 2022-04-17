@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
-  late String username;
+  late String username="";
 
 
   @override
@@ -103,7 +103,7 @@ void getUsers()async{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const myAppBar(),
+        appBar:  myAppBar(username),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           iconSize: 30.0,
