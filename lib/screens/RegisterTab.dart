@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodproject/Widgets/roundedButton.dart';
 import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -98,7 +99,7 @@ class _RegisterTabState extends State<RegisterTab> {
                 child: Image(
                   height: 200,
                   width: 200,
-                  image: AssetImage('images/logo3.png'),
+                  image: AssetImage('images/foodylogo.png'),
                 ),
               ),
               Padding(
@@ -121,6 +122,10 @@ class _RegisterTabState extends State<RegisterTab> {
                     prefixIcon: const Icon(Iconsax.user, color: kGrey),
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
+                    border: kOutlineInputBorder,
+                    enabledBorder: kEnabledBorder,
+                    focusedBorder: kFocusedBorder,
+                    disabledBorder: kDisabledBorder,
                   ),
                   onChanged: (value){
                     userNAme=userNameController.text;
@@ -151,6 +156,10 @@ class _RegisterTabState extends State<RegisterTab> {
                   prefixIcon: const Icon(Iconsax.user, color: kGrey),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: kOutlineInputBorder,
+                  enabledBorder: kEnabledBorder,
+                  focusedBorder: kFocusedBorder,
+                  disabledBorder: kDisabledBorder,
                 ),
                 onChanged: (value){
                   email=emailController.text;
@@ -180,6 +189,10 @@ class _RegisterTabState extends State<RegisterTab> {
                   prefixIcon: const Icon(Iconsax.key, color: kGrey),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  border: kOutlineInputBorder,
+                  enabledBorder: kEnabledBorder,
+                  focusedBorder: kFocusedBorder,
+                  disabledBorder: kDisabledBorder,
                 ),
                 onChanged: (value){
                   password=passwordController.text;
@@ -188,26 +201,16 @@ class _RegisterTabState extends State<RegisterTab> {
               const SizedBox(
                 height: 40.0,
               ),
-              Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xFFEA676A),
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: OutlinedButton(
-                      onPressed: _trySubmitForm,
-                      child: const Text('Register',
-                          style: TextStyle(
-                            // fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 25.0,
-                          )))),
+              RoundedButton('Register', _trySubmitForm),
               TextButton(
                   onPressed:(){Navigator.pushNamed(context, LoginTab.id);},
                   child: const Text(
                     "Already have an Account? Sign In",
                     textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
+                    style:TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFF36363a),
+                        fontFamily: 'Poppins'
                     ),
                   )),
             ],
