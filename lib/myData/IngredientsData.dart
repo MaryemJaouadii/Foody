@@ -7,6 +7,7 @@ List<Ingredient> ingredientsData = [
   Ingredient("Cheese", "Dp"),
   Ingredient("Butter", "Dp"),
   Ingredient("Yogurt", "Dp"),
+  Ingredient("Cream", "Dp"),
   Ingredient("Sour cream", "Dp"),
   Ingredient("Heavy cream", "Dp"),
   Ingredient("Cream", "Dp"),
