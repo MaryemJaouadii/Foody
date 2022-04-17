@@ -1,24 +1,20 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
-
 import '../myData/IngredientsData.dart';
 
-class Ingredient{
-  String ingrId;
+class Ingredient {
   String ingrName;
   String catId;
-  int calories;
 
-  Ingredient(this.ingrId, this.ingrName, this.catId, this.calories);
+  Ingredient(this.ingrName, this.catId);
 }
 
-class IngredientView{
+class IngredientView {
   Ingredient ingredient;
   IngredientView(this.ingredient);
   //IMPORTANT
   /*
-  *you cannot use the method .add or .remove on selectedIngredients get methods
+  *you cannot use the method .add or .remove on selectedIngredients get methods (9olli 3lech taw n9olek 3lech xD)
   *if you want to add or remove an item please use addToSelectedIngredients or removeFromSelectedIngredients
   *you  still can use other boolean methods as long as they don't modify the list
    */
@@ -26,39 +22,41 @@ class IngredientView{
   static List<String> _selectedIngredientsNames = [];
 
   static get selectedIngredients => UnmodifiableListView(_selectedIngredients);
-  static get selectedIngredientsNames => UnmodifiableListView(_selectedIngredientsNames);
+  static get selectedIngredientsNames =>
+      UnmodifiableListView(_selectedIngredientsNames);
 
-  static addToSelectedIngredients(Ingredient ingredient){
-    if(!selectedIngredients.contains(ingredient)) {
+  static addToSelectedIngredients(Ingredient ingredient) {
+    if (!selectedIngredients.contains(ingredient)) {
       _selectedIngredients.add(ingredient);
       _selectedIngredientsNames.add(ingredient.ingrName.toLowerCase());
     }
   }
 
-  static addToSelectedIngredientsByName(String name){
-    if(!selectedIngredientsNames.contains(name)) {
-      _selectedIngredients.add(ingredientsData.firstWhere((element) => element.ingrName.toLowerCase()==name));
+  static addToSelectedIngredientsByName(String name) {
+    if (!selectedIngredientsNames.contains(name)) {
+      _selectedIngredients.add(ingredientsData
+          .firstWhere((element) => element.ingrName.toLowerCase() == name));
       _selectedIngredientsNames.add(name);
     }
   }
 
-
-  static removeFromSelectedIngredients(Ingredient ingredient){
-    if(selectedIngredients.contains(ingredient)) {
+  static removeFromSelectedIngredients(Ingredient ingredient) {
+    if (selectedIngredients.contains(ingredient)) {
       _selectedIngredients.remove(ingredient);
       _selectedIngredientsNames.remove(ingredient.ingrName.toLowerCase());
     }
   }
 
-  static removeFromSelectedIngredientsByName(String name){
-    if(_selectedIngredientsNames.contains(name)) {
+  static removeFromSelectedIngredientsByName(String name) {
+    if (_selectedIngredientsNames.contains(name)) {
       _selectedIngredientsNames.remove(name);
-      _selectedIngredients.removeWhere((element) => element.ingrName.toLowerCase()==name);
+      _selectedIngredients
+          .removeWhere((element) => element.ingrName.toLowerCase() == name);
     }
   }
 
-  setChecked(){
-    if(selectedIngredients.contains(ingredient)) {
+  setChecked() {
+    if (selectedIngredients.contains(ingredient)) {
       _selectedIngredients.remove(ingredient);
       _selectedIngredientsNames.remove(ingredient.ingrName.toLowerCase());
     } else {
@@ -67,13 +65,5 @@ class IngredientView{
     }
   }
 
- static String getTotalIngredients() {
-    String tot='';
-    for (var i in selectedIngredients)
-      tot+=i.ingrName+ ' ';
-    return tot;
-  }
-
+  static String getTotalIngredients() => selectedIngredientsNames.join(" ");
 }
-
-

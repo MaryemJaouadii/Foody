@@ -7,5 +7,5 @@ import '../Models/Category.dart';
     Category("Sg", "images/sugar.jpg", "Sugar and chocolates"),
     Category("Fr", "images/fruit.jpg", "Fruits"),
     Category("Fl", "images/flour.jpg", "Flours and yeasts"),
-    Category("Oil", "images/oil.jpg", "Oils and fats")
+   // Category("Oil", "images/oil.jpg", "Oils and fats")
   ];
