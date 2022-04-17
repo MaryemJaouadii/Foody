@@ -128,6 +128,7 @@ class _useVoiceState extends State<useVoice> {
         tooltip: 'Listen',
         child: Icon(
           _speechToText.isListening ? Icons.mic : Icons.mic_off,
+          color: Colors.white,
         ),
       ),
     );
