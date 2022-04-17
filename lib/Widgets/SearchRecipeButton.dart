@@ -60,6 +60,13 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
                 MaterialPageRoute(
                     builder: (context) => TotalRecipes(recipies)));
           } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.grey.withOpacity(0.7),
+              content: Text(
+                'Please enter at least one ingredient !',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ));
             print("not doing it");
           }
         },
