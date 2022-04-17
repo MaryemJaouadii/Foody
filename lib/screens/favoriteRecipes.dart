@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodproject/Models/recipe_model.dart';
+import 'package:foodproject/Models/recipe.dart';
 import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
 

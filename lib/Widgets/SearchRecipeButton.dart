@@ -5,8 +5,9 @@ import 'package:foodproject/screens/totalRecipes.dart';
 import 'package:http/http.dart' as http;
 
 import '../Models/Ingredient.dart';
-import '../Models/recipe_model.dart';
+import '../Models/recipe.dart';
 import '../constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SearchRecipeButton extends StatefulWidget {
   @override
@@ -14,6 +15,11 @@ class SearchRecipeButton extends StatefulWidget {
 }
 
 class _SearchRecipeButtonState extends State<SearchRecipeButton> {
+
+
+
+
+
   bool loading = false;
   List<RecipeModel> recipies = new List<RecipeModel>.empty(growable: true);
   @override
@@ -37,7 +43,7 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             print(tot);
             recipies = new List<RecipeModel>.empty(growable: true);
             String url =
-                "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012";
+                "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free";
             var response = await http.get(Uri.parse(url));
             print(" $response this is response");
             Map<String, dynamic> jsonData = jsonDecode(response.body);

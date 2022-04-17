@@ -1,11 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/roundedButton.dart';
 import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'LoginTab.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class RegisterTab extends StatefulWidget {
   static const String id = 'register';
@@ -16,16 +17,27 @@ class RegisterTab extends StatefulWidget {
 }
 
 class _RegisterTabState extends State<RegisterTab> {
+  static const diseasesList = [
+    'None',
+    'Diabetes',
+    'Celiac Disease (Gluten intolerance)',
+    'Lactose intolerance',
+    'Tyramine intolerance',
+    'Histamine intolerance'
+  ];
+
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
   late String email;
   late String password;
   late String userNAme;
+  late String disease = '';
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController userNameController = new TextEditingController();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -65,7 +77,8 @@ class _RegisterTabState extends State<RegisterTab> {
           _firestore.collection("Users").add({
             "email": email,
             "username": userNAme,
-            "password": password
+            "password": password,
+            "disease": disease,
           }).then((value) {
             print(value);
           });
@@ -76,17 +89,6 @@ class _RegisterTabState extends State<RegisterTab> {
       }
     }
   }
-  /* void _trySubmitForm() async {
-
-      try{
-        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        if(newUser != null)
-          Navigator.pushNamed(context, LoginTab.id);
-      }
-      catch(e)
-      {print(e);}
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +168,51 @@ class _RegisterTabState extends State<RegisterTab> {
                 onChanged: (value) {
                   email = emailController.text;
                 },
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                child: TypeAheadFormField(
+                  suggestionsCallback: (pattern) => diseasesList.where(
+                    (item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()),
+                  ),
+                  itemBuilder: (_, String item) => ListTile(title: Text(item)),
+                  onSuggestionSelected: (String val) {
+                    this.disease = val;
+                    print(val);
+                  },
+                  getImmediateSuggestions: true,
+                  hideSuggestionsOnKeyboardHide: false,
+                  hideOnEmpty: false,
+                  noItemsFoundBuilder: (context) => Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'There is no disease with that name. Please try again!',
+                      style: khintStyle,
+                    ),
+                  ),
+                  textFieldConfiguration: TextFieldConfiguration(
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        prefixIcon: Icon(
+                          Icons.monitor_heart_outlined,
+                          color: kGrey,
+                        ),
+                        label: Center(
+                          child: Text(
+                            disease == '' ? 'Disease' : disease,
+                            style: khintStyle,
+                          ),
+                        ),
+                        border: kOutlineInputBorder,
+                        enabledBorder: kEnabledBorder,
+                        focusedBorder: kFocusedBorder,
+                        disabledBorder: kDisabledBorder),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 20.0,

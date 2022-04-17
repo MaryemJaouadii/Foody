@@ -5,7 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
-import '../Models/recipe_model.dart';
+import '../Models/recipe.dart';
 import '../Widgets/roundedButton.dart';
 import '../constants.dart';
 

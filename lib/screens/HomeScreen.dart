@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/myAppBar.dart';
 import 'package:foodproject/screens/Profile.dart';
 import 'package:foodproject/screens/favoriteRecipes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '../Models/Ingredient.dart';
 import '../Widgets/SearchIngredients.dart';
@@ -18,6 +21,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
+
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  late User loggedInUser;
+  late String usernmaee;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        //print('home screeeeeeeeeen'+loggedInUser.email.toString());
+       usernmaee= _firestore.collection('Users').where('email= '+loggedInUser.email.toString()).get().toString();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
+
+
+
+
   String applicationId = "227f981e";
   String applicationKey = "bc3ecb377a931c694b6b49412d31e012";
   String totalIngredients = IngredientView.getTotalIngredients();
@@ -34,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(10.0),
             child: SearchIngredients(),
           ),
@@ -42,14 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     ),
-    FavoriteRecipes(),
-    Profile(),
+    const FavoriteRecipes(),
+    const Profile(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

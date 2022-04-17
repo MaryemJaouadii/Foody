@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import '../Models/recipe_model.dart';
+import '../Models/recipe.dart';
 import '../screens/moreInfo.dart';
 import '../screens/recipe_view.dart';
 import 'package:url_launcher/url_launcher.dart';
