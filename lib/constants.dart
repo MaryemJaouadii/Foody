@@ -20,7 +20,7 @@ const kDisabledBorder = OutlineInputBorder(
   borderRadius: BorderRadius.all(Radius.circular(15.0)),
 );
 const kFocusedBorder = OutlineInputBorder(
-  borderSide: BorderSide(color: kGreen, width: 2.0),
+  borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
   borderRadius: BorderRadius.all(Radius.circular(15.0)),
 );
 
