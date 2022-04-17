@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodproject/constants.dart';
-import 'package:foodproject/screens/favoriteRecipes.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:path/path.dart';
 
 class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   const myAppBar({Key? key}) : super(key: key);
@@ -10,7 +6,7 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false ,
+      automaticallyImplyLeading: false,
       backgroundColor: Color(0xFFFCFFFF),
       centerTitle: false,
       elevation: 0,
@@ -64,15 +60,15 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 10.0),
-          child: IconButton(
-            icon: Icon(
-              Iconsax.heart,
-             color: ModalRoute.of(context)?.settings.name == 'favorite'? kPrimaryColor: Colors.black45,
-            ),
-            onPressed: () {
-              ModalRoute.of(context)?.settings.name != 'favorite'? Navigator.pushNamed(context, FavoriteRecipes.id): null;
-            },
-          ),
+          // child: IconButton(
+          //   icon: Icon(
+          //     Iconsax.heart,
+          //    color: ModalRoute.of(context)?.settings.name == 'favorite'? kPrimaryColor: Colors.black45,
+          //   ),
+          //   onPressed: () {
+          //     ModalRoute.of(context)?.settings.name != 'favorite'? Navigator.pushNamed(context, FavoriteRecipes.id): null;
+          //   },
+          // ),
         )
       ],
     );

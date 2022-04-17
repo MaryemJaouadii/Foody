@@ -42,8 +42,10 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      theme:
-          ThemeData(brightness: Brightness.light, primaryColor: kSecondColor),
+      theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'Poppins',
+          focusColor: kSecondColor),
       initialRoute: HomeScreen.id,
       routes: {
         LoginTab.id: (context) => LoginTab(),

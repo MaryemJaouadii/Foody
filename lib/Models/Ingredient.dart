@@ -68,4 +68,6 @@ class IngredientView {
   }
 
   static String getTotalIngredients() => selectedIngredientsNames.join(" ");
+  static String getTotalIngredientsMessage() =>
+      selectedIngredientsNames.join(", ");
 }
