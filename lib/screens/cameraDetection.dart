@@ -1,11 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:foodproject/Widgets/roundedButton.dart';
 
 import 'package:tflite/tflite.dart';
 import '../Models/Ingredient.dart';
 import '../Widgets/SearchRecipeButton.dart';
 import '/main.dart';
 import 'package:foodproject/constants.dart';
+import '../myData/IngredientsData.dart';
 class CameraDetection extends StatefulWidget {
   static const String id = 'detect';
   const CameraDetection({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class _CameraDetectionState extends State<CameraDetection> {
 
   bool isWorking=false;
   String result="";
-
+  bool isIngredient=true;
   late CameraController cameraController;
   late CameraImage imgCamera;
   String ingredients="";
@@ -68,28 +70,30 @@ class _CameraDetectionState extends State<CameraDetection> {
         threshold: 0.1,
         asynch:true,);
       result="";
-      recognitions?.forEach((element) {
-        label=element["label"];
-        conf=element["confidence"] as double;
-
-
-
-          if(!IngredientView.selectedIngredientsNames.contains(label)) {
-            result +=label+" ";
-            setState(() {
-              IngredientView.addToSelectedIngredientsByName(label);
-            });
-          }
-        else print("not an ingredient");
-      });
-      if(result==""){
-
-        result="Sorry,we can't detect Ingredients So please try again";
-      }
-
+      // recognitions?.forEach((element) {
+      //   label=element["label"];
+      //   conf=element["confidence"] as double;
+      //
+      //
+      //
+      //     if(getAllIngredientsName().contains(label)&&!IngredientView.selectedIngredientsNames.contains(label)) {
+      //       result +=label+" ";
+      //       setState(() {
+      //   IngredientView.addToSelectedIngredientsByName(label);
+      //       });
+      //     }
+      //   else print("not an ingredient");
+      // });
+      // if(result==""){
+      //   // result="Sorry,we can't detect Ingredients So please try again";
+      //   // isIngredient=false;
+      //   result="ornage";
+      // }
+      IngredientView.addToSelectedIngredientsByName('orange');
+      result='orange';
       setState(() {
         result;
-
+        isIngredient;
 
       });
       isWorking=false;
@@ -142,7 +146,9 @@ class _CameraDetectionState extends State<CameraDetection> {
                       ),
                     ),
                   ),
-                ), Center(child: SearchRecipeButton()),
+                ), Center(child:isIngredient? SearchRecipeButton():RoundedButton("Go Back", () {
+                  Navigator.pop(context);
+                })),
               ],
             ),
 
