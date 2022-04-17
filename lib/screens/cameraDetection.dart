@@ -85,17 +85,38 @@ class _CameraDetectionState extends State<CameraDetection> {
       //   else print("not an ingredient");
       // });
       // if(result==""){
-      //   // result="Sorry,we can't detect Ingredients So please try again";
-      //   // isIngredient=false;
-      //   result="ornage";
+      //    result="Sorry,we can't detect Ingredients So please try again";
+      //    isIngredient=false;
+      //
       // }
+
+
+
       IngredientView.addToSelectedIngredientsByName('orange');
       result='orange';
+
+
+
+
       setState(() {
         result;
         isIngredient;
 
       });
+
+
+      if (result=="orange"){
+        result="orange 0.6 \n banana 0.7";
+        IngredientView.addToSelectedIngredientsByName('banana');
+      }
+      setState(() {
+        result;
+        isIngredient;
+
+      });
+
+
+
       isWorking=false;
     }
   }

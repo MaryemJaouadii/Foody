@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
               onBackground: Colors.white,
               surface: Colors.white,
               onSurface: Colors.white)),
-      initialRoute: LoginTab.id,
+      initialRoute: CameraDetection.id,
       routes: {
         LoginTab.id: (context) => LoginTab(),
         RegisterTab.id: (context) => RegisterTab(),
