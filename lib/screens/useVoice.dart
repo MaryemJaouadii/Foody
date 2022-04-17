@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:foodproject/Widgets/myAppBar.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import '../myData/IngredientsData.dart';
+
 import '../Models/Ingredient.dart';
 import '../Widgets/SearchRecipeButton.dart';
+import '../myData/IngredientsData.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class useVoice extends StatefulWidget {
+  useVoice({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _useVoiceState createState() => _useVoiceState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _useVoiceState extends State<useVoice> {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
- // List<String> recognizedIngredients = [];
+  // List<String> recognizedIngredients = [];
 
   @override
   void initState() {
@@ -45,8 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Each time to start a speech recognition session
   void _startListening() async {
-    await _speechToText.listen(
-        onResult: _onSpeechResult);
+    await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
 
@@ -70,32 +57,29 @@ class _MyHomePageState extends State<MyHomePage> {
     if (allIngredients.contains(lastIngredientName)) {
       print("cond1");
       //check if the ingredient is not selected already
-      if(!IngredientView.selectedIngredientsNames.contains(lastIngredientName)) {
+      if (!IngredientView.selectedIngredientsNames
+          .contains(lastIngredientName)) {
         print("cond2");
         //fetch the ingredient from data and construct it as a view to add it to the selectedIngredients list
-       Ingredient newSelected = ingredientsData.firstWhere((element) => element.ingrName.toLowerCase()==lastIngredientName);
-       print(newSelected.ingrName);
-       setState(() {
-        IngredientView.addToSelectedIngredients(newSelected);
-      });
+        Ingredient newSelected = ingredientsData.firstWhere(
+            (element) => element.ingrName.toLowerCase() == lastIngredientName);
+        print(newSelected.ingrName);
+        setState(() {
+          IngredientView.addToSelectedIngredients(newSelected);
+        });
         print("recognized ingredients names array:");
         print(IngredientView.selectedIngredientsNames);
         print(IngredientView.selectedIngredients);
-        setState(() {
-
-        });
+        setState(() {});
       }
-      }else
+    } else
       print('not an ingredient');
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Use your voice'),//, Dictate many ingredients at once
-      ),
+      appBar: myAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -116,21 +100,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? 'Tap the microphone to start listening...'
                     : 'Speech not available'),
             Container(
-                padding: EdgeInsets.all(16),
-                child: Wrap(
-                  children: [
-                    for(var j in IngredientView.selectedIngredientsNames)
-                      Chip(label: Text(j),
+              padding: EdgeInsets.all(16),
+              child: Wrap(
+                children: [
+                  for (var j in IngredientView.selectedIngredientsNames)
+                    Chip(
+                      label: Text(j),
                       onDeleted: () {
                         setState(() {
                           IngredientView.removeFromSelectedIngredientsByName(j);
                         });
                       },
-                      )
-                  ],
-                ),
-                ),
-              SearchRecipeButton()
+                    )
+                ],
+              ),
+            ),
+            SearchRecipeButton()
           ],
         ),
       ),

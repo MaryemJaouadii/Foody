@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:foodproject/myData/IngredientsData.dart';
-import '../Widgets/CategoryView.dart';
 import 'package:foodproject/myData/CategoriesData.dart';
+import 'package:foodproject/myData/IngredientsData.dart';
+import 'package:foodproject/screens/cameraDetection.dart';
 import 'package:searchfield/searchfield.dart';
+
+import '../Widgets/CategoryView.dart';
+import '../screens/useVoice.dart';
 
 class SearchIngredients extends StatefulWidget {
   const SearchIngredients({Key? key}) : super(key: key);
@@ -14,42 +17,53 @@ class SearchIngredients extends StatefulWidget {
 class _SearchIngredientsState extends State<SearchIngredients> {
   var myList = getAllIngredientsName();
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            "Search by ingredients",
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
-          ),
-        ),
         Padding(
-          padding:
-          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
           child: SearchField(
             suggestions: myList
                 .map(
                   (e) => SearchFieldListItem(e),
-            )
+                )
                 .toList(),
             searchInputDecoration: InputDecoration(
               filled: true,
               fillColor: Color(0xFFF5F7FB),
-              contentPadding: EdgeInsets.symmetric(vertical: 15.0),
-              hintText: "Search by recipe, ingredient, dish...",
+              // contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+              hintText: "Search...",
               prefixIcon: Icon(Icons.search),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // added line
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => useVoice()));
+                      },
+                      icon: Icon(Icons.mic)),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CameraDetection()));
+                      },
+                      icon: Icon(Icons.camera_alt))
+                ],
+              ),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide:
-                  BorderSide(style: BorderStyle.none, width: 0.0)),
+                  borderSide: BorderSide(style: BorderStyle.none, width: 1.0)),
             ),
           ),
         ),
-        for(var i in categoriesData)
-        CategoryView(i),
+        for (var i in categoriesData) CategoryView(i),
       ],
     );
   }
