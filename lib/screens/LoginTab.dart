@@ -1,11 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/roundedButton.dart';
 import 'package:foodproject/constants.dart';
-import 'package:foodproject/main.dart';
+import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:foodproject/screens/HomeScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginTab extends StatefulWidget {
   static const String id = 'login';
@@ -37,12 +36,18 @@ class _LoginTabState extends State<LoginTab> {
     try {
       final user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      if (user != null) Navigator.pushNamed(context, HomeScreen.id);
+      if (user != null) {
+        Navigator.pushNamed(context, HomeScreen.id);
+      }
     } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.grey.withOpacity(0.7),
+        content: const Text('Please verify your credentials !',
+            style: TextStyle(fontWeight: FontWeight.w600)),
+      ));
       print(e);
     }
   }
-
 
   @override
   void dispose() {
@@ -51,7 +56,6 @@ class _LoginTabState extends State<LoginTab> {
     passwordController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +88,9 @@ class _LoginTabState extends State<LoginTab> {
                     // Return null if the entered email is valid
                     return null;
                   },
-
-                  onChanged: (value){
-                    email=emailController.text;
+                  onChanged: (value) {
+                    email = emailController.text;
                   },
-
-
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
                   decoration: const InputDecoration(
@@ -116,15 +117,10 @@ class _LoginTabState extends State<LoginTab> {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter your password';
                   }
-                  if (value.trim().length < 8) {
-                    return "Password can't be less than 8 characters";
-                  }
-
                   return null;
                 },
-
-                onChanged: (value){
-                  password=passwordController.text;
+                onChanged: (value) {
+                  password = passwordController.text;
                 },
                 obscureText: true,
                 textAlign: TextAlign.center,

@@ -1,11 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/Widgets/roundedButton.dart';
 import 'package:foodproject/constants.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'LoginTab.dart';
-import'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 class RegisterTab extends StatefulWidget {
   static const String id = 'register';
   const RegisterTab({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class RegisterTab extends StatefulWidget {
 }
 
 class _RegisterTabState extends State<RegisterTab> {
-  final _auth=FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
   late String email;
@@ -32,35 +33,36 @@ class _RegisterTabState extends State<RegisterTab> {
 
     getCurrentUser();
   }
-@override
+
+  @override
   void dispose() {
     // TODO: implement dispose
-  emailController.dispose();
-  passwordController.dispose();
-  userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    userNameController.dispose();
     super.dispose();
   }
-  void getCurrentUser()async{
-    try{
+
+  void getCurrentUser() async {
+    try {
       final user = await _auth.currentUser;
-      if (user != null){
-      loggedInUser = user;
-      print(loggedInUser.email);
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
       }
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
 
- void _trySubmitForm() async {
+  void _trySubmitForm() async {
     final isValid = _formKey.currentState!.validate();
     if (isValid == true) {
-      try{
-        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        if(newUser != null) {
-          _firestore
-              .collection("Users")
-              .add({
+      try {
+        final newUser = await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        if (newUser != null) {
+          _firestore.collection("Users").add({
             "email": email,
             "username": userNAme,
             "password": password
@@ -69,12 +71,12 @@ class _RegisterTabState extends State<RegisterTab> {
           });
           Navigator.pushNamed(context, LoginTab.id);
         }
+      } catch (e) {
+        print(e);
       }
-      catch(e)
-      {print(e);}
     }
   }
- /* void _trySubmitForm() async {
+  /* void _trySubmitForm() async {
 
       try{
         final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -127,8 +129,8 @@ class _RegisterTabState extends State<RegisterTab> {
                     focusedBorder: kFocusedBorder,
                     disabledBorder: kDisabledBorder,
                   ),
-                  onChanged: (value){
-                    userNAme=userNameController.text;
+                  onChanged: (value) {
+                    userNAme = userNameController.text;
                   },
                 ),
               ),
@@ -154,15 +156,15 @@ class _RegisterTabState extends State<RegisterTab> {
                   hintText: 'Email Address',
                   hintStyle: khintStyle,
                   prefixIcon: const Icon(Iconsax.user, color: kGrey),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20.0),
                   border: kOutlineInputBorder,
                   enabledBorder: kEnabledBorder,
                   focusedBorder: kFocusedBorder,
                   disabledBorder: kDisabledBorder,
                 ),
-                onChanged: (value){
-                  email=emailController.text;
+                onChanged: (value) {
+                  email = emailController.text;
                 },
               ),
               const SizedBox(
@@ -187,15 +189,15 @@ class _RegisterTabState extends State<RegisterTab> {
                   hintText: 'Password',
                   hintStyle: khintStyle,
                   prefixIcon: const Icon(Iconsax.key, color: kGrey),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20.0),
                   border: kOutlineInputBorder,
                   enabledBorder: kEnabledBorder,
                   focusedBorder: kFocusedBorder,
                   disabledBorder: kDisabledBorder,
                 ),
-                onChanged: (value){
-                  password=passwordController.text;
+                onChanged: (value) {
+                  password = passwordController.text;
                 },
               ),
               const SizedBox(
@@ -203,15 +205,16 @@ class _RegisterTabState extends State<RegisterTab> {
               ),
               RoundedButton('Register', _trySubmitForm),
               TextButton(
-                  onPressed:(){Navigator.pushNamed(context, LoginTab.id);},
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginTab.id);
+                  },
                   child: const Text(
                     "Already have an Account? Sign In",
                     textAlign: TextAlign.start,
-                    style:TextStyle(
+                    style: TextStyle(
                         fontSize: 18,
                         color: Color(0xFF36363a),
-                        fontFamily: 'Poppins'
-                    ),
+                        fontFamily: 'Poppins'),
                   )),
             ],
           ),
