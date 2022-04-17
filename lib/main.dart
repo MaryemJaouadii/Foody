@@ -45,7 +45,20 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
           brightness: Brightness.light,
           fontFamily: 'Poppins',
-          focusColor: kSecondColor),
+          primaryColor: kPrimaryColor,
+          focusColor: kSecondColor,
+          colorScheme: const ColorScheme(
+              brightness: Brightness.light,
+              primary: kPrimaryColor,
+              onPrimary: kSecondColor,
+              secondary: kSecondColor,
+              onSecondary: kSecondColor,
+              error: kGreen,
+              onError: kGreen,
+              background: Colors.white,
+              onBackground: Colors.white,
+              surface: Colors.white,
+              onSurface: Colors.white)),
       initialRoute: HomeScreen.id,
       routes: {
         LoginTab.id: (context) => LoginTab(),

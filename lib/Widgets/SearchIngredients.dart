@@ -17,7 +17,8 @@ class SearchIngredients extends StatefulWidget {
 
 class _SearchIngredientsState extends State<SearchIngredients> {
   var myList = getAllIngredientsName();
-  late TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
+  FocusNode searchFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,14 @@ class _SearchIngredientsState extends State<SearchIngredients> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
           child: SearchField(
+            focusNode: searchFocusNode,
             onSubmit: (e) {
               if (myList.contains(e)) {
                 setState(() {
                   IngredientView.addToSelectedIngredientsByName(e);
                   searchController.clear();
                 });
+                searchFocusNode.unfocus();
               }
             },
             controller: searchController,
@@ -41,6 +44,7 @@ class _SearchIngredientsState extends State<SearchIngredients> {
                     e.item.toString());
                 searchController.clear();
               });
+              searchFocusNode.unfocus();
             },
             suggestions: myList
                 .map(
@@ -48,9 +52,6 @@ class _SearchIngredientsState extends State<SearchIngredients> {
                 )
                 .toList(),
             searchInputDecoration: InputDecoration(
-              // focusColor: kSecondColor,
-              // focusedBorder: const OutlineInputBorder(
-              //     borderSide: BorderSide(color: kSecondColor)),
               filled: true,
               fillColor: Color(0xFFF5F7FB),
               hintText: "Search...",
@@ -78,8 +79,8 @@ class _SearchIngredientsState extends State<SearchIngredients> {
                 ],
               ),
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(style: BorderStyle.none, width: 0.1)),
+                borderRadius: BorderRadius.circular(30),
+              ),
             ),
           ),
         ),
