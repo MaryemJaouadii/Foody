@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class myAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const myAppBar({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -31,8 +29,8 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Text(
                     ModalRoute.of(context)?.settings.name == 'home'
-                        ? "Hello Shayma,"
-                        : "Shayma Trad",
+                        ? "Hello User,"
+                        : "userName",
                     style: const TextStyle(
                         color: Colors.black45, fontWeight: FontWeight.w600)),
                 Text(
@@ -52,25 +50,6 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
-      /*
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          * Profile Picture
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          */
-      actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 10.0),
-          // child: IconButton(
-          //   icon: Icon(
-          //     Iconsax.heart,
-          //    color: ModalRoute.of(context)?.settings.name == 'favorite'? kPrimaryColor: Colors.black45,
-          //   ),
-          //   onPressed: () {
-          //     ModalRoute.of(context)?.settings.name != 'favorite'? Navigator.pushNamed(context, FavoriteRecipes.id): null;
-          //   },
-          // ),
-        )
-      ],
     );
   }
 

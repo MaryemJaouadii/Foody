@@ -18,7 +18,6 @@ class useVoice extends StatefulWidget {
 class _useVoiceState extends State<useVoice> {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
-  // List<String> recognizedIngredients = [];
 
   @override
   void initState() {
