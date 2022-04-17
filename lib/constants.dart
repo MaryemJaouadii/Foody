@@ -8,18 +8,21 @@ final khintStyle = TextStyle(
   color: kGrey,
 );
 
-
- const kOutlineInputBorder= OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  );
-  const kEnabledBorder= OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.black12, width: 1.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  );
-  const kFocusedBorder= OutlineInputBorder(
-    borderSide: BorderSide(color: kGreen, width: 2.0),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  );
+const kOutlineInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+);
+const kEnabledBorder = OutlineInputBorder(
+  borderSide: BorderSide(color: Colors.black12, width: 1.0),
+  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+);
+const kDisabledBorder = OutlineInputBorder(
+  borderSide: BorderSide(color: Colors.red, width: 1.0),
+  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+);
+const kFocusedBorder = OutlineInputBorder(
+  borderSide: BorderSide(color: kGreen, width: 2.0),
+  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+);
 
 final kFoodHealthDetailsStyle = TextStyle(
     color: Colors.black.withOpacity(0.5),
