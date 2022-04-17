@@ -12,7 +12,7 @@
         </intent>
     </queries>
    <application
-        android:label="foodproject"
+        android:label="Foody"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
