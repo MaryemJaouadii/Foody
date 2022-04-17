@@ -8,21 +8,18 @@ final khintStyle = TextStyle(
   color: kGrey,
 );
 
-final kTextFieldDecoration = InputDecoration(
-  hintText: 'Type your message here...',
-  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-  border: OutlineInputBorder(
+
+ const kOutlineInputBorder= OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  enabledBorder: OutlineInputBorder(
+  );
+  const kEnabledBorder= OutlineInputBorder(
     borderSide: BorderSide(color: Colors.black12, width: 1.0),
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-  focusedBorder: OutlineInputBorder(
+  );
+  const kFocusedBorder= OutlineInputBorder(
     borderSide: BorderSide(color: kGreen, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  ),
-);
+  );
 
 final kFoodHealthDetailsStyle = TextStyle(
     color: Colors.black.withOpacity(0.5),
