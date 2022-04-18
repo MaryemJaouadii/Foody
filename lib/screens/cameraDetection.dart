@@ -95,6 +95,11 @@ class _CameraDetectionState extends State<CameraDetection> {
 
       });
 
+      setState(() {
+        result;
+        isIngredient;
+
+      });
       isIngredient=true;
       IngredientView.addToSelectedIngredientsByName('orange');
       result='orange';
@@ -108,7 +113,11 @@ class _CameraDetectionState extends State<CameraDetection> {
 
       });
 
+      setState(() {
+        result;
+        isIngredient;
 
+      });
       if (result=="orange"){
         result="orange 0.6 \n banana 0.7";
         IngredientView.addToSelectedIngredientsByName('banana');
