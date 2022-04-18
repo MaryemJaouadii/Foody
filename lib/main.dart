@@ -60,16 +60,15 @@ class _HomePageState extends State<HomePage> {
               onBackground: Colors.white,
               surface: Colors.white,
               onSurface: Colors.white)),
-      initialRoute: RegisterTab.id,
+      initialRoute: LoginTab.id,
       routes: {
         LoginTab.id: (context) => LoginTab(),
         RegisterTab.id: (context) => RegisterTab(),
         HomeScreen.id: (context) => HomeScreen(),
         FavoriteRecipes.id: (context) => FavoriteRecipes(),
         CameraDetection.id: (context) => CameraDetection(),
-        FavoriteRecipes.id: (context)=> FavoriteRecipes(),
-        Profile.id:(context)=> Profile(),
-
+        FavoriteRecipes.id: (context) => FavoriteRecipes(),
+        Profile.id: (context) => Profile(),
       },
     );
   }

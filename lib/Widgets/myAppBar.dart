@@ -38,6 +38,7 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 onTap:() {
 
+                  Navigator.pushNamed(context, Profile.id);
                 } ,
               ),
             ),
