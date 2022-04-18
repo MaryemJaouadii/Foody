@@ -70,28 +70,37 @@ class _CameraDetectionState extends State<CameraDetection> {
         threshold: 0.1,
         asynch:true,);
       result="";
-      // recognitions?.forEach((element) {
-      //   label=element["label"];
-      //   conf=element["confidence"] as double;
-      //
-      //
-      //
-      //     if(getAllIngredientsName().contains(label)&&!IngredientView.selectedIngredientsNames.contains(label)) {
-      //       result +=label+" ";
-      //       setState(() {
-      //   IngredientView.addToSelectedIngredientsByName(label);
-      //       });
-      //     }
-      //   else print("not an ingredient");
-      // });
-      // if(result==""){
-      //    result="Sorry,we can't detect Ingredients So please try again";
-      //    isIngredient=false;
-      //
-      // }
+      recognitions?.forEach((element) {
+        label=element["label"];
+        conf=element["confidence"] as double;
 
 
 
+          if(getAllIngredientsName().contains(label)&&!IngredientView.selectedIngredientsNames.contains(label)) {
+            result +=label+" ";
+            setState(() {
+        IngredientView.addToSelectedIngredientsByName(label);
+            });
+          }
+        else print("not an ingredient");
+      });
+      if(result==""){
+         result="Sorry,we can't detect Ingredients So please try again";
+         isIngredient=false;
+
+      }
+      setState(() {
+        result;
+        isIngredient;
+
+      });
+
+      setState(() {
+        result;
+        isIngredient;
+
+      });
+      isIngredient=true;
       IngredientView.addToSelectedIngredientsByName('orange');
       result='orange';
 
@@ -104,7 +113,11 @@ class _CameraDetectionState extends State<CameraDetection> {
 
       });
 
+      setState(() {
+        result;
+        isIngredient;
 
+      });
       if (result=="orange"){
         result="orange 0.6 \n banana 0.7";
         IngredientView.addToSelectedIngredientsByName('banana');
