@@ -61,6 +61,7 @@ class _useVoiceState extends State<useVoice> {
         if (doc["email"]==loggedInUser.email){
           username=doc["username"];
           print(doc["username"]);
+
         }
       });
     });

@@ -36,6 +36,7 @@ class _TotalRecipesState extends State<TotalRecipes> {
 
 
 
+
   void getCurrentUser() async {
     try {
       final user = await _auth.currentUser;

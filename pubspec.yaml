@@ -52,6 +52,8 @@ dependencies:
   firebase_auth: ^3.3.14
   firebase_core: ^1.14.1
   flutter_typeahead: ^3.2.4
+  image_picker: ^0.8.3+3
+  file_picker: ^4.0.0
 
 
 

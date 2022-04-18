@@ -21,9 +21,9 @@ class _RegisterTabState extends State<RegisterTab> {
     'None',
     'Diabetes',
     'Celiac Disease (Gluten intolerance)',
-    'Lactose intolerance',
-    'Tyramine intolerance',
-    'Histamine intolerance'
+    'Lactose Intolerance',
+    'Tyramine Intolerance',
+    'Histamine Intolerance'
   ];
 
   final _auth = FirebaseAuth.instance;

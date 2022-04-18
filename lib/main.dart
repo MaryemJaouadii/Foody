@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodproject/constants.dart';
 import 'package:foodproject/screens/HomeScreen.dart';
 import 'package:foodproject/screens/LoginTab.dart';
+import 'package:foodproject/screens/Profile.dart';
 import 'package:foodproject/screens/RegisterTab.dart';
 import 'package:foodproject/screens/cameraDetection.dart';
 import 'package:foodproject/screens/favoriteRecipes.dart';
@@ -66,6 +67,9 @@ class _HomePageState extends State<HomePage> {
         HomeScreen.id: (context) => HomeScreen(),
         FavoriteRecipes.id: (context) => FavoriteRecipes(),
         CameraDetection.id: (context) => CameraDetection(),
+        FavoriteRecipes.id: (context)=> FavoriteRecipes(),
+        Profile.id:(context)=> Profile(),
+
       },
     );
   }

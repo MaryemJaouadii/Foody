@@ -21,24 +21,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+    getUsers();
 
 
-
-
+  }
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   late User loggedInUser;
-  late String username="";
+  late String username='';
 
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    getCurrentUser();
-    getUsers();
-  }
 
   void getCurrentUser() async {
     try {
@@ -46,30 +42,28 @@ class _HomeScreenState extends State<HomeScreen> {
       if (user != null) {
         loggedInUser = user;
         //print('home screeeeeeeeeen'+loggedInUser.email.toString());
-       //username= await _firestore.collection('Users').snapshots();
+        //username= await _firestore.collection('Users').snapshots();
       }
     } catch (e) {
       print(e);
     }
   }
 
-void getUsers()async{
-  await FirebaseFirestore.instance
-      .collection('Users')
-      .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
+  void getUsers()async{
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
 
-      if (doc["email"]==loggedInUser.email){
-        username=doc["username"];
-        print(doc["username"]);
-      }
+        if (doc["email"]==loggedInUser.email){
+          username=doc["username"];
+          print(doc["username"]);
+
+        }
+      });
     });
-  });
-}
-
-
-
+  }
 
 
   String applicationId = "227f981e";
@@ -97,13 +91,13 @@ void getUsers()async{
       ),
     ),
     const FavoriteRecipes(),
-    const Profile(),
+     //Profile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  myAppBar(username),
+        appBar: myAppBar(username),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
           iconSize: 30.0,

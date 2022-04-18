@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../screens/Profile.dart';
+import 'image_widget.dart';
+
 class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   var userName;
 
- myAppBar(this.userName);
+
+
+  myAppBar(this.userName);
 
   @override
   Widget build(BuildContext context) {
+
+
+    Profile profile;
+
+
+
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Color(0xFFFCFFFF),
@@ -18,11 +29,16 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(right: 10.0),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage('images/6.jpg'),
+              child: GestureDetector(
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundImage: userName=='Maryem Jaouadi'? AssetImage('images/maryem2.jpg'): AssetImage('images/noprofilepic.jpg'),
+                ),
+                onTap:() {
+
+                } ,
               ),
             ),
             Column(
@@ -54,25 +70,6 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
           ],
         ),
       ),
-      /*
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          * Profile Picture
-          * %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-          */
-      actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 10.0),
-          // child: IconButton(
-          //   icon: Icon(
-          //     Iconsax.heart,
-          //    color: ModalRoute.of(context)?.settings.name == 'favorite'? kPrimaryColor: Colors.black45,
-          //   ),
-          //   onPressed: () {
-          //     ModalRoute.of(context)?.settings.name != 'favorite'? Navigator.pushNamed(context, FavoriteRecipes.id): null;
-          //   },
-          // ),
-        )
-      ],
     );
   }
 

@@ -28,6 +28,7 @@ class _RecipeViewState extends State<RecipeView> {
 
 
 
+
   void getCurrentUser() async {
     try {
       final user = await _auth.currentUser;
@@ -51,6 +52,7 @@ class _RecipeViewState extends State<RecipeView> {
         if (doc["email"]==loggedInUser.email){
           username=doc["username"];
           print(doc["username"]);
+
         }
       });
     });

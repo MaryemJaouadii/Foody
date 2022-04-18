@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodproject/screens/totalRecipes.dart';
 import 'package:http/http.dart' as http;
@@ -15,10 +16,46 @@ class SearchRecipeButton extends StatefulWidget {
 }
 
 class _SearchRecipeButtonState extends State<SearchRecipeButton> {
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  late User loggedInUser;
+  late String disease = "";
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
+    getCurrentUser();
+    getUsers();
+  }
 
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        //print('home screeeeeeeeeen'+loggedInUser.email.toString());
+        //username= await _firestore.collection('Users').snapshots();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
+  void getUsers() async {
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        if (doc["email"] == loggedInUser.email) {
+          disease = doc["disease"];
+          print('recipe button ' + doc["disease"]);
+        }
+      });
+    });
+  }
 
   bool loading = false;
   List<RecipeModel> recipies = new List<RecipeModel>.empty(growable: true);
@@ -26,9 +63,8 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          //gradient: kGradientColor,
           color: kPrimaryColor,
-          borderRadius: BorderRadius.circular(15.0)),
+          borderRadius: BorderRadius.circular(20.0)),
       child: OutlinedButton(
         onPressed: () async {
           print("entered in button");
@@ -42,8 +78,18 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
             print("**********************");
             print(tot);
             recipies = new List<RecipeModel>.empty(growable: true);
-            String url =
-                "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free";
+            String url = disease == 'Diabetes'
+                ? "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free&sugar-free"
+                : disease == 'Celiac Disease (Gluten intolerance)'
+                    ? "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free&Gluten-Free"
+                    : disease == 'Lactose Intolerance'
+                        ? "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&Dairy-Free&pork-free&foodCategory-is-not-equal-to-Dairy"
+                        : disease == 'Tyramine Intolerance'
+                            ? "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free&foodCategory-is-not-equal-to-Cheese"
+                            : disease == 'Histamine Intolerance'
+                                ? "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free&food-is-not-equal-to-tomatoes"
+                                : "https://api.edamam.com/search?q=${tot}&app_id=227f981e&app_key=bc3ecb377a931c694b6b49412d31e012&health=alcohol-free&pork-free";
+
             var response = await http.get(Uri.parse(url));
             print(" $response this is response");
             Map<String, dynamic> jsonData = jsonDecode(response.body);
@@ -68,7 +114,7 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Colors.grey.withOpacity(0.7),
-              content: Text(
+              content: const Text(
                 'Please enter at least one ingredient !',
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
@@ -80,7 +126,6 @@ class _SearchRecipeButtonState extends State<SearchRecipeButton> {
           padding: EdgeInsets.all(5.0),
           child: Text('Go on!',
               style: TextStyle(
-                // fontWeight: FontWeight.bold,
                 color: Colors.white,
                 fontSize: 20.0,
               )),
