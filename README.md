@@ -1,20 +1,7 @@
-# foodproject
+# Foody
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A new Flutter project that helps to search recipes by ingredients.
 
 
-https://user-images.githubusercontent.com/81593805/167271156-0015cb17-bc00-4b57-9861-354b8d5a9b65.mp4
+https://user-images.githubusercontent.com/64952949/167268965-d37ddc24-881b-44c2-8738-639ed9df60f8.mp4
 
